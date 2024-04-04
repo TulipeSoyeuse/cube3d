@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 15:02:35 by romain            #+#    #+#             */
-/*   Updated: 2024/02/10 15:28:07 by romain           ###   ########.fr       */
+/*   Updated: 2024/04/02 16:09:36 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	main(void)
 {
-	void	*mlx;
+	t_params	p;
+	t_window	w;
 
-	mlx = mlx_init();
-	mlx_destroy_display(mlx);
+	p = get_map();
 	return (0);
 }
