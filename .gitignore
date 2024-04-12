@@ -1,4 +1,3 @@
 .vscode
 objs/*
-cub3d
-cub3d*
+cube3d*
