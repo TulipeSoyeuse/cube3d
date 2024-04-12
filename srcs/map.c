@@ -6,27 +6,26 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:10:32 by romain            #+#    #+#             */
-/*   Updated: 2024/04/10 16:35:45 by romain           ###   ########.fr       */
+/*   Updated: 2024/04/12 13:29:52 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	map_error(t_params p, int argc, ...)
+void	set_map_env(int fd, char *line, t_params *p)
 {
-	va_list	a_lst;
-	char	*arg;
+	char	**map;
 
-	va_start(a_lst, argc);
-	while (argc--)
+	map = malloc(sizeof(char *) * 2);
+	map[0] = line;
+	map[1] = NULL;
+	while (is_line_map(line))
 	{
-		arg = va_arg(a_lst, char *);
-		if (arg)
-			free(arg);
+		line = get_next_line(fd);
+		map = add_line(map, line);
+		if (!map)
+			map_error(*p, 1, line);
 	}
-	va_end(a_lst);
-	write(1, "MAP ERROR", 10);
-	exit(1);
 }
 
 void	read_map(int fd, t_params *p)
@@ -50,22 +49,18 @@ void	read_map(int fd, t_params *p)
 		ti = get_identifier(line);
 		if (!ti)
 			map_error(*p, 1, line);
-		set_identifier(ti, line, p);
+		set_identifier_handler(ti, line, p);
+		free(line);
 	}
 }
 
-t_params	get_map(t_window w, char *path)
+void	get_map(t_params *p, char *path)
 {
-	t_params	p;
-	int			x;
-	int			fd;
+	int	fd;
 
-	p.ea_texture = NULL;
-	p.no_texture = NULL;
-	p.we_texture = NULL;
-	p.so_texture = NULL;
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-		map_error(p, 0);
-	read_map(fd, &p);
+		map_error(*p, 0);
+	close(fd);
+	read_map(fd, p);
 }

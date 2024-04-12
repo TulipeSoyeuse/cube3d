@@ -6,11 +6,12 @@
 #    By: romain <romain@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/10 14:30:15 by romain            #+#    #+#              #
-#    Updated: 2024/04/10 15:10:06 by romain           ###   ########.fr        #
+#    Updated: 2024/04/12 13:44:43 by romain           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC_FILES 		=	main.c \
+SRC_FILES 		=	main.c	image.c	map_parsing_utils.c \
+					map.c	utils.c	window.c	cleanup.c
 					
 SRC_DIR 		= srcs
 OBJ_DIR 		= objs
@@ -26,24 +27,24 @@ X11 			= /opt/homebrew/Cellar/libx11/1.8.7/lib
 NAME			= cube3d
 NAME_debug		= cube3d_debug
 MINILIBX		= minilibx-linux/libmlx.a
+MINIGNL			= minignl/minignl.a
 LIBS			= -L$(Xext) -L$(X11) -lX11 -lXext -L$(dir $(MINILIBX)) -lmlx
-
 all: $(NAME)
 
 db: $(NAME_debug)
 
 
 $(OBJ_DIR)/%_debug.o: $(SRC_DIR)/%.c
-	$(CC) $(CFLAGS) -g3 -I$(HEADER_DIR) -L$(Xext) -lXext -L$(X11) -lX11 -c -o $@ $<
+	$(CC) $(CFLAGS) -g3 -I$(HEADER_DIR) -c $< -o $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c 
-	$(CC) $(CFLAGS) $(LIBS) -I$(HEADER_DIR) -c $< -o $@
+	$(CC) $(CFLAGS) -I$(HEADER_DIR) -c $< -o $@
 
 $(NAME): $(OBJ) $(MINILIBX) $(LIBFT) $(MINIGNL)
-	$(CC) $(CFLAGS)  $^ -o $@
+	$(CC) $(CFLAGS) $(LIBS) -I$(HEADER_DIR) $^ -o $@
 
 $(NAME_debug): $(OBJ_debug) $(MINILIBX) $(LIBFT) $(MINIGNL)
-	$(CC) $(CFLAGS) $(LIBS) -I$(HEADER_DIR) -c $< -o $@
+	$(CC) $(CFLAGS) $(LIBS) -I$(HEADER_DIR) $^ -o $@
 
 $(MINILIBX):
 	Make -C $(dir $@)

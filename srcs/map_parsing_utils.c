@@ -6,44 +6,15 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:25:22 by romain            #+#    #+#             */
-/*   Updated: 2024/04/10 16:37:32 by romain           ###   ########.fr       */
+/*   Updated: 2024/04/12 13:15:37 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	is_space(int c)
+int	rgb_to_hex(int r, int g, int b)
 {
-	if (c == '\t' || c == ' ' || c == '\v' || c == '\r')
-		return (1);
-	return (0);
-}
-
-int	is_empty(char *s)
-{
-	if (*s == 0)
-		return (1);
-	return (0);
-}
-
-int	is_line_map(char *line)
-{
-	int	pos;
-
-	pos = 0;
-	while (line)
-	{
-		if (*line != '1' && *line != '0' && !is_space(*line))
-		{
-			if (!pos && (*line == 'W' || *line == 'S' || *line == 'N'
-					|| *line == 'E'))
-				pos = 1;
-			else
-				return (0);
-		}
-		line++;
-	}
-	return (1);
+	return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
 }
 
 t_type_def	get_identifier(const char *s)
@@ -70,7 +41,54 @@ t_type_def	get_identifier(const char *s)
 	return (0);
 }
 
-void	set_identifier(t_type_def type, char *line, t_params *p)
+void	set_color(int *color, const char *line, t_params *p)
+{
+	int	offset;
+	int	r;
+	int	g;
+	int	b;
+
+	while (!is_space(*line))
+		line++;
+	line++;
+	offset = ft_strchr(line, ',') - line;
+	r = ft_atoin(line, offset);
+	line += offset + 1;
+	offset = ft_strchr(line, ',') - line;
+	g = ft_atoin(line, offset);
+	line += offset + 1;
+	b = ft_atoi(line);
+	if (r < 0 || g < 0 || b < 0)
+		map_error(*p, 0);
+	*color = rgb_to_hex(r, g, b);
+}
+
+void	set_ti(void **texture, const char *line, t_params *p)
+{
+	int	size;
+
+	size = 40;
+	while (!is_space(*line))
+		line++;
+	while (is_space(*line))
+		line++;
+	*texture = mlx_xpm_file_to_image(p->w.mlx, (char *)line, &size, &size);
+	if (*texture)
+		map_error(*p, 1, line);
+}
+
+void	set_identifier_handler(t_type_def type, char *line, t_params *p)
 {
 	if (type == NO)
+		set_ti(&p->no_texture, line, p);
+	if (type == EA)
+		set_ti(&p->ea_texture, line, p);
+	if (type == WE)
+		set_ti(&p->we_texture, line, p);
+	if (type == SO)
+		set_ti(&p->so_texture, line, p);
+	if (type == F)
+		set_color(&p->f_color, line, p);
+	if (type == C)
+		set_color(&p->c_color, line, p);
 }
