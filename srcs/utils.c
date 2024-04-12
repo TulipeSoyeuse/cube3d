@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:50:14 by romain            #+#    #+#             */
-/*   Updated: 2024/04/11 11:22:06 by romain           ###   ########.fr       */
+/*   Updated: 2024/04/12 13:48:13 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,26 @@ int	ft_atoin(const char *s, int n)
 	res = ft_atoi(buf);
 	free(buf);
 	return (res);
+}
+
+char	**add_line(char **map, char *line)
+{
+	size_t	size_map;
+	char	**new_map;
+
+	size_map = 0;
+	while (map[size_map])
+		size_map++;
+	new_map = malloc(sizeof(char *) * (size_map + 2));
+	if (!new_map)
+		return (NULL);
+	size_map = 0;
+	while (map[size_map])
+	{
+		new_map = map;
+		size_map++;
+	}
+	new_map[size_map] = line;
+	new_map[size_map + 1] = NULL;
+	return (new_map);
 }
