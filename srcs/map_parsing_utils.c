@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:25:22 by romain            #+#    #+#             */
-/*   Updated: 2024/04/12 13:15:37 by romain           ###   ########.fr       */
+/*   Updated: 2024/04/12 13:59:56 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ t_type_def	get_identifier(const char *s)
 	{
 		if (!is_space(*s))
 		{
-			if (!strncmp(s, "NO ", 5))
+			if (!strncmp(s, "NO ", 3))
 				return (NO);
-			if (!strncmp(s, "SO ", 5))
+			if (!strncmp(s, "SO ", 3))
 				return (SO);
-			if (!strncmp(s, "EA ", 5))
+			if (!strncmp(s, "EA ", 3))
 				return (EA);
-			if (!strncmp(s, "WE ", 5))
+			if (!strncmp(s, "WE ", 3))
 				return (WE);
-			if (!strncmp(s, "C ", 4))
+			if (!strncmp(s, "C ", 2))
 				return (C);
-			if (!strncmp(s, "F ", 4))
+			if (!strncmp(s, "F ", 2))
 				return (F);
 		}
 		s++;
@@ -73,7 +73,7 @@ void	set_ti(void **texture, const char *line, t_params *p)
 	while (is_space(*line))
 		line++;
 	*texture = mlx_xpm_file_to_image(p->w.mlx, (char *)line, &size, &size);
-	if (*texture)
+	if (!*texture)
 		map_error(*p, 1, line);
 }
 

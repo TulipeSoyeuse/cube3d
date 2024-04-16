@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:10:32 by romain            #+#    #+#             */
-/*   Updated: 2024/04/12 13:29:52 by romain           ###   ########.fr       */
+/*   Updated: 2024/04/13 12:27:52 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,19 @@ void	set_map_env(int fd, char *line, t_params *p)
 	char	**map;
 
 	map = malloc(sizeof(char *) * 2);
+	if (!map)
+		map_error(*p, 1, line);
 	map[0] = line;
 	map[1] = NULL;
-	while (is_line_map(line))
+	line = get_next_line(fd);
+	while (line)
 	{
-		line = get_next_line(fd);
 		map = add_line(map, line);
 		if (!map)
 			map_error(*p, 1, line);
+		line = get_next_line(fd);
 	}
+	p->map = map;
 }
 
 void	read_map(int fd, t_params *p)
@@ -36,6 +40,7 @@ void	read_map(int fd, t_params *p)
 	while (1)
 	{
 		line = get_next_line(fd);
+		printf("line:\"%s\"\n", line);
 		if (is_empty(line))
 		{
 			free(line);
@@ -54,6 +59,27 @@ void	read_map(int fd, t_params *p)
 	}
 }
 
+void	display_params(t_params *p)
+{
+	int	i;
+
+	printf("f_color:%x\n", p->f_color);
+	printf("c_color:%x\n", p->c_color);
+	printf("\nno_texture:%p\n", p->no_texture);
+	printf("so_texture:%p\n", p->so_texture);
+	printf("ea_texture:%p\n", p->ea_texture);
+	printf("we_texture:%p\n", p->we_texture);
+	printf("\nmap:\n");
+	i = 0;
+	while (p->map[i])
+		printf("%s\n", p->map[i++]);
+	printf("\nmlx:\n");
+	printf("ptr:%p\n", p->w.mlx);
+	printf("win:%p\n", p->w.mlx_win);
+	printf("img1:%p\n", p->w.cur_img.img);
+	printf("img2:%p\n", p->w.cache_img.img);
+}
+
 void	get_map(t_params *p, char *path)
 {
 	int	fd;
@@ -61,6 +87,7 @@ void	get_map(t_params *p, char *path)
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		map_error(*p, 0);
-	close(fd);
 	read_map(fd, p);
+	display_params(p);
+	close(fd);
 }

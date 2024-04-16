@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:50:14 by romain            #+#    #+#             */
-/*   Updated: 2024/04/12 13:48:13 by romain           ###   ########.fr       */
+/*   Updated: 2024/04/13 12:27:54 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	is_line_map(char *line)
 	int	pos;
 
 	pos = 0;
-	while (line)
+	while (line && *line)
 	{
 		if (*line != '1' && *line != '0' && !is_space(*line))
 		{
@@ -83,14 +83,15 @@ char	**add_line(char **map, char *line)
 		size_map++;
 	new_map = malloc(sizeof(char *) * (size_map + 2));
 	if (!new_map)
-		return (NULL);
+		return (map);
 	size_map = 0;
 	while (map[size_map])
 	{
-		new_map = map;
+		new_map[size_map] = map[size_map];
 		size_map++;
 	}
 	new_map[size_map] = line;
 	new_map[size_map + 1] = NULL;
+	free(map);
 	return (new_map);
 }

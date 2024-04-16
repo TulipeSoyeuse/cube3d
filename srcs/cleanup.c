@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 13:05:05 by romain            #+#    #+#             */
-/*   Updated: 2024/04/12 13:32:56 by romain           ###   ########.fr       */
+/*   Updated: 2024/04/13 12:30:51 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ void	map_cleanup(char **map)
 	int	i;
 
 	i = 0;
+	if (!map)
+		return ;
 	while (map[i])
 	{
+		// printf("%p - %d - %s\n", map[i], i, map[i]);
 		free(map[i++]);
 	}
 	free(map);
@@ -65,6 +68,6 @@ void	map_error(t_params p, int argc, ...)
 			free(arg);
 	}
 	va_end(a_lst);
-	write(1, "MAP ERROR", 10);
+	write(1, "MAP ERROR\n", 10);
 	exit(1);
 }

@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:52:13 by romain            #+#    #+#             */
-/*   Updated: 2024/04/12 13:30:12 by romain           ###   ########.fr       */
+/*   Updated: 2024/04/13 12:25:27 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +105,7 @@ int				is_path(char *path);
 void			map_error(t_params p, int argc, ...);
 void			cleanup(t_params *p);
 void			error(t_params *p);
+
+// DEBUG
+
 #endif
