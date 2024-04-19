@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:10:32 by romain            #+#    #+#             */
-/*   Updated: 2024/04/13 12:27:52 by romain           ###   ########.fr       */
+/*   Updated: 2024/04/19 12:39:26 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	read_map(int fd, t_params *p)
 	while (1)
 	{
 		line = get_next_line(fd);
-		printf("line:\"%s\"\n", line);
 		if (is_empty(line))
 		{
 			free(line);
@@ -73,11 +72,10 @@ void	display_params(t_params *p)
 	i = 0;
 	while (p->map[i])
 		printf("%s\n", p->map[i++]);
-	printf("\nmlx:\n");
-	printf("ptr:%p\n", p->w.mlx);
-	printf("win:%p\n", p->w.mlx_win);
-	printf("img1:%p\n", p->w.cur_img.img);
-	printf("img2:%p\n", p->w.cache_img.img);
+	printf("\nmlx_ptr:%p\n", p->w.mlx);
+	printf("mlx_win:%p\n", p->w.mlx_win);
+	printf("mlx_img1:%p\n", p->w.cur_img.img);
+	printf("mlx_img2:%p\n", p->w.cache_img.img);
 }
 
 void	get_map(t_params *p, char *path)
@@ -88,6 +86,8 @@ void	get_map(t_params *p, char *path)
 	if (fd == -1)
 		map_error(*p, 0);
 	read_map(fd, p);
+	// if (check_map(p->map))
+	// 	map_error(*p, 0);
 	display_params(p);
 	close(fd);
 }

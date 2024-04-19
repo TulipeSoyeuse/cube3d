@@ -6,12 +6,13 @@
 #    By: romain <romain@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/10 14:30:15 by romain            #+#    #+#              #
-#    Updated: 2024/04/13 11:00:21 by romain           ###   ########.fr        #
+#    Updated: 2024/04/19 12:45:42 by romain           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC_FILES 		=	main.c	image.c	map_parsing_utils.c \
-					map.c	utils.c	window.c	cleanup.c
+					map.c	utils.c	window.c	cleanup.c \
+					map_checker.c calculus.c
 					
 SRC_DIR 		= srcs
 OBJ_DIR 		= objs
@@ -22,18 +23,23 @@ HEADER_DIR 		= includes
 LIBFT			= libft/libft.a
 CC				= cc
 CFLAGS 			= -Wextra -Wall -Werror
-Xext 			= /opt/homebrew/Cellar/libxext/1.3.6/lib
-X11 			= /opt/homebrew/Cellar/libx11/1.8.9/lib
 NAME			= cube3d
 NAME_debug		= cube3d_debug
 MINILIBX		= minilibx-linux/libmlx.a
 MINIGNL			= minignl/minignl.a
-LIBS			= -L$(Xext) -L$(X11) -lX11 -lXext -L$(dir $(MINILIBX)) -lmlx
 SAN				= cube3d_san
 
+UNAME			= $(shell uname)
+ifeq ($(UNAME), Darwin)
+Xext 			= /opt/homebrew/Cellar/libxext/1.3.6/lib
+X11 			= /opt/homebrew/Cellar/libx11/1.8.9/lib
+LIBS			= -L$(Xext) -L$(X11) -lX11 -lXext -L$(dir $(MINILIBX)) -lmlx
+endif
+ifeq ($(UNAME), Linux)
+LIBS			= -L$(dir $(MINILIBX)) -lmlx
+endif
 
 all: $(NAME)
-
 db: $(NAME_debug)
 
 $(OBJ_DIR)/%_debug.o: $(SRC_DIR)/%.c
