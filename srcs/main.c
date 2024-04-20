@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 15:02:35 by romain            #+#    #+#             */
-/*   Updated: 2024/04/19 12:31:11 by romain           ###   ########.fr       */
+/*   Updated: 2024/04/19 17:37:33 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_params	init(char *path)
 		exit(EXIT_FAILURE);
 	p.c_color = 0;
 	p.f_color = 0;
+	p.w.mlx = NULL;
+	p.w.mlx_win = NULL;
 	p.ea_texture = NULL;
 	p.no_texture = NULL;
 	p.so_texture = NULL;

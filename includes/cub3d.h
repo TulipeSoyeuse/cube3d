@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:52:13 by romain            #+#    #+#             */
-/*   Updated: 2024/04/19 12:46:03 by romain           ###   ########.fr       */
+/*   Updated: 2024/04/19 17:53:23 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@
 # include <unistd.h>
 
 // SCREEN
-# define SWIDTH 640
-# define SHEIGHT 480
+# define SWIDTH 900
+# define SHEIGHT 600
 
 // KEY
-# define EVENT_CLOSE_BTN 17
+# define EVENT_CLOSE_BTN 1869819968
 # define KEY_ESC 65307
 
 # define COLOR_BLUE 0x003C43
