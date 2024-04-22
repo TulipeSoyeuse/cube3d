@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 15:02:35 by romain            #+#    #+#             */
-/*   Updated: 2024/04/19 17:37:33 by romain           ###   ########.fr       */
+/*   Updated: 2024/04/20 18:00:34 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (EXIT_FAILURE);
 	p = init(av[1]);
+	set_player_position(&p);
+	printf("pos:%f %f\n", p.p_pos.x, p.p_pos.y);
+	p.plane.x = 0;
+	p.plane.y = 0.66;
 	run(&p);
 	cleanup(&p);
 	return (0);

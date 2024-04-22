@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:52:13 by romain            #+#    #+#             */
-/*   Updated: 2024/04/19 17:53:23 by romain           ###   ########.fr       */
+/*   Updated: 2024/04/20 17:41:43 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ void			calc_side_dist(t_params *p, t_calc_values *cv);
 t_vector		dist(t_params *p, double camX);
 void			draw_ver_line(int line, int start, int end, t_img img);
 int				get_perpwalldist(t_calc_values cv);
+void			set_player_position(t_params *p);
 
 // RUNNING
 void			run(t_params *p);

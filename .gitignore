@@ -1,3 +1,6 @@
 .vscode
 objs/*
 cube3d*
+*.cub
+3DSage_Raycaster_v1.c
+*.cpp

@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 12:01:06 by romain            #+#    #+#             */
-/*   Updated: 2024/04/19 12:45:56 by romain           ###   ########.fr       */
+/*   Updated: 2024/04/20 19:20:55 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	is_hit(t_params *p, t_calc_values *cv)
 {
+	// printf("map:%f, %f\n", cv->map.x, cv->map.y);
 	if (cv->sideDist.x < cv->sideDist.y)
 	{
 		cv->sideDist.x += cv->deltaDist.x;
@@ -27,7 +28,10 @@ void	is_hit(t_params *p, t_calc_values *cv)
 		cv->side = True;
 	}
 	if (p->map[(int)cv->map.x][(int)cv->map.y] == 1)
+	{
+		printf("hit on wall %d, %d\n", (int)cv->map.x, (int)cv->map.y);
 		cv->hit = True;
+	}
 }
 
 void	calc_side_dist(t_params *p, t_calc_values *cv)
@@ -86,6 +90,7 @@ void	draw_ver_line(int line_nbr, int start, int end, t_img img)
 {
 	char	*dst;
 
+	printf("writing wal, pxl up:%d to %d\n", start, end);
 	while (start < end)
 	{
 		dst = img.addr + (start++ * img.line_length + line_nbr
