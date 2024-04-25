@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:52:13 by romain            #+#    #+#             */
-/*   Updated: 2024/04/20 17:41:43 by romain           ###   ########.fr       */
+/*   Updated: 2024/04/25 15:16:46 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,27 @@
 # include <unistd.h>
 
 // SCREEN
-# define SWIDTH 900
-# define SHEIGHT 600
+# define SWIDTH 600
+# define SHEIGHT 400
 
 // KEY
 # define EVENT_CLOSE_BTN 1869819968
 # define KEY_ESC 65307
+# define KEY_LEFT 113
+# define KEY_UP 122
+# define KEY_RIGHT 100
+# define KEY_DOWN 115
+
+# define MOVESPEED 0.5
+# define ROTATION_SPEED M_PI / 8
 
 # define COLOR_BLUE 0x003C43
 # define COLOR_RED 0xED4545
 # define COLOR_WHITE 0xFFFFFF
 # define COLOR_YELLOW 0xFCC100
 # define COLOR_GREEN 0x5DAF00
+
+# define FOV 0.66
 
 typedef enum e_bool
 {
@@ -98,13 +107,14 @@ typedef struct s_params
 
 typedef struct s_calc_values
 {
-	t_vector	map;
+	int			mapX;
+	int			mapY;
+	int			stepX;
+	int			stepY;
 	t_vector	deltaDist;
 	t_vector	rayDir;
 	t_vector	sideDist;
-	t_vector	step;
 	t_bool		side;
-	t_bool		hit;
 }				t_calc_values;
 
 t_img			get_new_image(t_params *p);
@@ -122,19 +132,21 @@ int				is_empty(char *s);
 int				is_line_map(char *line);
 int				ft_atoin(const char *s, int n);
 int				is_path(char *path);
+void			display_params(t_params *p);
 
 // EXIT
 void			map_error(t_params p, int argc, ...);
 void			cleanup(t_params *p);
 void			error(t_params *p);
 void			cube_exit(t_params *p);
+int				close_event(t_params *p);
 
 // CALCULUS
-void			is_hit(t_params *p, t_calc_values *cv);
+int				is_hit(t_params *p, t_calc_values *cv);
 void			calc_side_dist(t_params *p, t_calc_values *cv);
-t_vector		dist(t_params *p, double camX);
+void			dist(t_params *p, t_calc_values *c, double camX);
 void			draw_ver_line(int line, int start, int end, t_img img);
-int				get_perpwalldist(t_calc_values cv);
+double			get_perpwalldist(t_calc_values cv);
 void			set_player_position(t_params *p);
 
 // RUNNING
@@ -142,4 +154,6 @@ void			run(t_params *p);
 void			loop(t_params *p);
 void			reset_img_color(t_img img);
 
+// HOOKS
+int				key_hook(int button, t_params *p);
 #endif

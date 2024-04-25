@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 15:02:35 by romain            #+#    #+#             */
-/*   Updated: 2024/04/20 18:00:34 by romain           ###   ########.fr       */
+/*   Updated: 2024/04/23 12:57:21 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_params	init(char *path)
 	p.w.mlx = mlx_init();
 	if (!p.w.mlx)
 		error(&p);
-	p.w.mlx_win = mlx_new_window(p.w.mlx, SHEIGHT, SWIDTH, "Cube3D");
+	p.w.mlx_win = mlx_new_window(p.w.mlx, SWIDTH, SHEIGHT, "Cube3D");
 	if (!p.w.mlx_win)
 		error(&p);
 	get_map(&p, path);
@@ -48,9 +48,6 @@ int	main(int ac, char **av)
 		return (EXIT_FAILURE);
 	p = init(av[1]);
 	set_player_position(&p);
-	printf("pos:%f %f\n", p.p_pos.x, p.p_pos.y);
-	p.plane.x = 0;
-	p.plane.y = 0.66;
 	run(&p);
 	cleanup(&p);
 	return (0);

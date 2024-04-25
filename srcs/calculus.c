@@ -6,79 +6,72 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 12:01:06 by romain            #+#    #+#             */
-/*   Updated: 2024/04/20 19:20:55 by romain           ###   ########.fr       */
+/*   Updated: 2024/04/25 10:39:12 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	is_hit(t_params *p, t_calc_values *cv)
+int	is_hit(t_params *p, t_calc_values *cv)
 {
-	// printf("map:%f, %f\n", cv->map.x, cv->map.y);
 	if (cv->sideDist.x < cv->sideDist.y)
 	{
 		cv->sideDist.x += cv->deltaDist.x;
-		cv->map.x += cv->step.x;
+		cv->mapX += cv->stepX;
 		cv->side = False;
 	}
 	else
 	{
 		cv->sideDist.y += cv->deltaDist.y;
-		cv->map.y += cv->step.y;
+		cv->mapY += cv->stepY;
 		cv->side = True;
 	}
-	if (p->map[(int)cv->map.x][(int)cv->map.y] == 1)
-	{
-		printf("hit on wall %d, %d\n", (int)cv->map.x, (int)cv->map.y);
-		cv->hit = True;
-	}
+	if (p->map[cv->mapX][cv->mapY] == '1')
+		return (1);
+	return (0);
 }
 
 void	calc_side_dist(t_params *p, t_calc_values *cv)
 {
-	cv->map.x = (int)p->p_pos.x;
-	cv->map.y = (int)p->p_pos.y;
+	cv->mapX = (int)p->p_pos.x;
+	cv->mapY = (int)p->p_pos.y;
 	if (cv->rayDir.x < 0)
 	{
-		cv->step.x = -1;
-		cv->sideDist.x = (p->p_pos.x - cv->map.x) * cv->deltaDist.x;
+		cv->stepX = -1;
+		cv->sideDist.x = (p->p_pos.x - cv->mapX) * cv->deltaDist.x;
 	}
 	else
 	{
-		cv->step.x = 1;
-		cv->sideDist.x = (cv->map.x + 1.0 - p->p_pos.x) * cv->deltaDist.x;
+		cv->stepX = 1;
+		cv->sideDist.x = (cv->mapX + 1.0 - p->p_pos.x) * cv->deltaDist.x;
 	}
 	if (cv->rayDir.y < 0)
 	{
-		cv->step.y = -1;
-		cv->sideDist.y = (p->p_pos.y - cv->map.y) * cv->deltaDist.y;
+		cv->stepY = -1;
+		cv->sideDist.y = (p->p_pos.y - cv->mapY) * cv->deltaDist.y;
 	}
 	else
 	{
-		cv->step.y = 1;
-		cv->sideDist.y = (cv->map.y + 1.0 - p->p_pos.y) * cv->deltaDist.y;
+		cv->stepY = 1;
+		cv->sideDist.y = (cv->mapY + 1.0 - p->p_pos.y) * cv->deltaDist.y;
 	}
 }
 
-t_vector	dist(t_params *p, double camX)
+void	dist(t_params *p, t_calc_values *c, double camX)
 {
-	t_vector	rayDir;
-	t_vector	deltaDist;
-
-	rayDir.x = p->p_dir.x + p->plane.x * camX;
-	rayDir.y = p->p_dir.y + p->plane.y * camX;
-	if (!rayDir.x)
-		deltaDist.x = 1e30;
+	c->rayDir.x = p->p_dir.x + p->plane.x * camX;
+	c->rayDir.y = p->p_dir.y + p->plane.y * camX;
+	if (!c->rayDir.x)
+		c->deltaDist.x = 1e30;
 	else
-		deltaDist.x = fabs(1 / rayDir.x);
-	if (!rayDir.y)
-		deltaDist.y = 1e30;
+		c->deltaDist.x = fabs(1 / c->rayDir.x);
+	if (!c->rayDir.y)
+		c->deltaDist.y = 1e30;
 	else
-		deltaDist.y = fabs(1 / rayDir.y);
-	return (deltaDist);
+		c->deltaDist.y = fabs(1 / c->rayDir.y);
 }
 
-int	get_perpwalldist(t_calc_values cv)
+double	get_perpwalldist(t_calc_values cv)
 {
 	if (cv.side == False)
 		return (cv.sideDist.x - cv.deltaDist.x);
@@ -86,14 +79,13 @@ int	get_perpwalldist(t_calc_values cv)
 		return (cv.sideDist.y - cv.deltaDist.y);
 }
 
-void	draw_ver_line(int line_nbr, int start, int end, t_img img)
+void	draw_ver_line(int col_nbr, int start, int end, t_img img)
 {
 	char	*dst;
 
-	printf("writing wal, pxl up:%d to %d\n", start, end);
 	while (start < end)
 	{
-		dst = img.addr + (start++ * img.line_length + line_nbr
+		dst = img.addr + (start++ * img.line_length + col_nbr
 				* (img.bits_per_pixel / 8));
 		*(unsigned int *)dst = COLOR_RED;
 	}
@@ -113,7 +105,7 @@ void	reset_img_color(t_img img)
 		{
 			dst = img.addr + (y * img.line_length + x * (img.bits_per_pixel
 						/ 8));
-			*(unsigned int *)dst = 0;
+			*(unsigned int *)dst = 0xFFF0f0;
 			x++;
 		}
 		y++;

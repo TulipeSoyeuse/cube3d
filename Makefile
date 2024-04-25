@@ -6,13 +6,13 @@
 #    By: romain <romain@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/10 14:30:15 by romain            #+#    #+#              #
-#    Updated: 2024/04/19 17:23:24 by romain           ###   ########.fr        #
+#    Updated: 2024/04/25 14:54:57 by romain           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC_FILES 		=	main.c	image.c	map_parsing_utils.c \
 					map.c	utils.c	window.c	cleanup.c \
-					map_checker.c calculus.c
+					map_checker.c calculus.c	hooks.c
 					
 SRC_DIR 		= srcs
 OBJ_DIR 		= objs
@@ -20,6 +20,7 @@ SRC 			= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ 			= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 OBJ_debug		= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=_debug.o))
 HEADER_DIR 		= includes
+HEADER			= $(HEADER_DIR)/cub3d.h
 LIBFT			= libft/libft.a
 CC				= cc
 CFLAGS 			= -Wextra -Wall -Werror
@@ -42,16 +43,16 @@ endif
 all: $(NAME)
 db: $(NAME_debug)
 
-$(OBJ_DIR)/%_debug.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+$(OBJ_DIR)/%_debug.o: $(SRC_DIR)/%.c  | $(OBJ_DIR) 
 	$(CC) $(CFLAGS) -g3 -I$(HEADER_DIR)  -c $< -o $@
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c  | $(OBJ_DIR) 
 	$(CC) $(CFLAGS) -I$(HEADER_DIR) -c $< -o $@
 
-$(NAME): $(OBJ) $(MINILIBX) $(LIBFT) $(MINIGNL)
+$(NAME): $(OBJ) $(MINILIBX) $(LIBFT) $(MINIGNL) 
 	$(CC) $(CFLAGS) $(LIBS) -I$(HEADER_DIR) $^ -o $@
 
-$(NAME_debug): $(OBJ_debug) $(MINILIBX) $(LIBFT) $(MINIGNL)
+$(NAME_debug): $(OBJ_debug) $(MINILIBX) $(LIBFT) $(MINIGNL) 
 	$(CC) $(CFLAGS) $(LIBS) -I$(HEADER_DIR) $^ -o $@
 
 $(OBJ_DIR):

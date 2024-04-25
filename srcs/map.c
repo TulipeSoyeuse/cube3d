@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:10:32 by romain            #+#    #+#             */
-/*   Updated: 2024/04/19 17:13:38 by romain           ###   ########.fr       */
+/*   Updated: 2024/04/23 12:49:12 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ void	display_params(t_params *p)
 	printf("so_texture:%p\n", p->so_texture);
 	printf("ea_texture:%p\n", p->ea_texture);
 	printf("we_texture:%p\n", p->we_texture);
+	printf("\npos:%f %f\n", p->p_pos.x, p->p_pos.y);
+	printf("dir:%f %f\n", p->p_dir.x, p->p_dir.y);
+	printf("plane:%f %f\n", p->plane.x, p->plane.y);
 	printf("\nmap:\n");
 	i = 0;
 	while (p->map[i])
@@ -88,6 +91,5 @@ void	get_map(t_params *p, char *path)
 	read_map(fd, p);
 	// if (check_map(p->map))
 	// 	map_error(*p, 0);
-	display_params(p);
 	close(fd);
 }
