@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 10:41:30 by romain            #+#    #+#             */
-/*   Updated: 2024/04/25 15:22:45 by romain           ###   ########.fr       */
+/*   Updated: 2024/04/26 12:45:00 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	display_new_image(t_params *p)
 	buf = p->w.cur_img;
 	p->w.cur_img = p->w.cache_img;
 	p->w.cache_img = buf;
-	reset_img_color(p->w.cur_img);
+	reset_img_color(p, p->w.cur_img);
 	calc_image(p, p->w.cur_img);
 	mlx_put_image_to_window(p->w.mlx, p->w.mlx_win, p->w.cur_img.img, 0, 0);
 }
@@ -34,23 +34,23 @@ void	move_down(t_params *p)
 {
 	if (p->map[(int)(p->p_pos.x + p->p_dir.x
 			* MOVESPEED)][(int)p->p_pos.y] != '1')
-		p->p_pos.x += p->p_dir.x * MOVESPEED;
+		p->p_pos.x -= p->p_dir.x * MOVESPEED;
 	if (p->map[(int)p->p_pos.x][(int)(p->p_pos.y + p->p_dir.y
 			* MOVESPEED)] != '1')
-		p->p_pos.x += p->p_dir.y * MOVESPEED;
+		p->p_pos.y -= p->p_dir.y * MOVESPEED;
 }
 
 void	move_up(t_params *p)
 {
 	if (p->map[(int)(p->p_pos.x + p->p_dir.x
 			* MOVESPEED)][(int)p->p_pos.y] != '1')
-		p->p_pos.x -= p->p_dir.x * MOVESPEED;
+		p->p_pos.x += p->p_dir.x * MOVESPEED;
 	if (p->map[(int)p->p_pos.x][(int)(p->p_pos.y + p->p_dir.y
 			* MOVESPEED)] != '1')
-		p->p_pos.x -= p->p_dir.y * MOVESPEED;
+		p->p_pos.y += p->p_dir.y * MOVESPEED;
 }
 
-void	move_right(t_params *p)
+void	move_left(t_params *p)
 {
 	double	oldDirX;
 	double	oldPlaneX;
@@ -67,7 +67,7 @@ void	move_right(t_params *p)
 		* cos(-ROTATION_SPEED);
 }
 
-void	move_left(t_params *p)
+void	move_right(t_params *p)
 {
 	double	oldDirX;
 	double	oldPlaneX;

@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:10:32 by romain            #+#    #+#             */
-/*   Updated: 2024/04/23 12:49:12 by romain           ###   ########.fr       */
+/*   Updated: 2024/04/26 11:55:50 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ void	display_params(t_params *p)
 	printf("\npos:%f %f\n", p->p_pos.x, p->p_pos.y);
 	printf("dir:%f %f\n", p->p_dir.x, p->p_dir.y);
 	printf("plane:%f %f\n", p->plane.x, p->plane.y);
+	printf("perpendicular: %f\n", p->p_dir.x * p->plane.x + p->p_dir.y
+		* p->plane.y);
 	printf("\nmap:\n");
 	i = 0;
 	while (p->map[i])

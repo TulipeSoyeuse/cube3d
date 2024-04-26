@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 10:45:46 by romain            #+#    #+#             */
-/*   Updated: 2024/04/23 13:12:49 by romain           ###   ########.fr       */
+/*   Updated: 2024/04/26 12:43:19 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,21 @@ int	set_dir(t_params *p, char c)
 	if (c == 'N')
 	{
 		p->p_dir.x = 0;
-		p->p_dir.y = 1;
+		p->p_dir.y = -1;
 	}
 	else if (c == 'S')
 	{
 		p->p_dir.x = 0;
-		p->p_dir.y = -1;
+		p->p_dir.y = 1;
 	}
 	else if (c == 'E')
 	{
-		p->p_dir.x = -1;
+		p->p_dir.x = 1;
 		p->p_dir.y = 0;
 	}
 	else if (c == 'W')
 	{
-		p->p_dir.x = 1;
+		p->p_dir.x = -1;
 		p->p_dir.y = 0;
 	}
 	else
@@ -113,7 +113,9 @@ void	calc_image(t_params *p, t_img img)
 	int				drawStart;
 	int				drawEnd;
 	int				x;
+	int				color;
 
+	reset_img_color(p, img);
 	x = -1;
 	while (++x < SWIDTH)
 	{
@@ -129,6 +131,28 @@ void	calc_image(t_params *p, t_img img)
 		drawEnd = lineHeight / 2 + SHEIGHT / 2;
 		if (drawEnd >= SHEIGHT)
 			drawEnd = SHEIGHT - 1;
-		draw_ver_line(x, drawStart, drawEnd, img);
+		switch (p->map[c.mapX][c.mapY])
+		{
+		case 1:
+			color = COLOR_RED;
+			break ; // red
+		case 2:
+			color = COLOR_GREEN;
+			break ; // green
+		case 3:
+			color = COLOR_BLUE;
+			break ; // blue
+		case 4:
+			color = 0;
+			break ; // white
+		default:
+			color = COLOR_YELLOW;
+			break ; // yellow
+		}
+		if (c.side == 1)
+		{
+			color = color / 2;
+		}
+		draw_ver_line(x, drawStart, drawEnd, img, color);
 	}
 }

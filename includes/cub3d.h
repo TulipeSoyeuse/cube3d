@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:52:13 by romain            #+#    #+#             */
-/*   Updated: 2024/04/25 15:16:46 by romain           ###   ########.fr       */
+/*   Updated: 2024/04/26 12:43:13 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,14 +145,15 @@ int				close_event(t_params *p);
 int				is_hit(t_params *p, t_calc_values *cv);
 void			calc_side_dist(t_params *p, t_calc_values *cv);
 void			dist(t_params *p, t_calc_values *c, double camX);
-void			draw_ver_line(int line, int start, int end, t_img img);
+void			draw_ver_line(int line, int start, int end, t_img img,
+					int color);
 double			get_perpwalldist(t_calc_values cv);
 void			set_player_position(t_params *p);
 
 // RUNNING
 void			run(t_params *p);
 void			loop(t_params *p);
-void			reset_img_color(t_img img);
+void			reset_img_color(t_params *p, t_img img);
 
 // HOOKS
 int				key_hook(int button, t_params *p);
