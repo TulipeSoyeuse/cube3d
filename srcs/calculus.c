@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 12:01:06 by romain            #+#    #+#             */
-/*   Updated: 2024/04/26 12:43:49 by romain           ###   ########.fr       */
+/*   Updated: 2024/04/29 20:36:52 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ int	is_hit(t_params *p, t_calc_values *cv)
 		cv->side = True;
 	}
 	if (p->map[cv->mapX][cv->mapY] > '0' && p->map[cv->mapX][cv->mapY] <= '9')
+	{
+		define_ori(cv);
 		return (1);
+	}
 	return (0);
 }
 

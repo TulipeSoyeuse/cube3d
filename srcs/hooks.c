@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 10:41:30 by romain            #+#    #+#             */
-/*   Updated: 2024/04/26 12:45:00 by romain           ###   ########.fr       */
+/*   Updated: 2024/04/29 17:13:35 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	move_right(t_params *p)
 
 int	key_hook(int button, t_params *p)
 {
-	printf("button pressed: %d\n", button);
+	// printf("button pressed: %d\n", button);
 	if (button == EVENT_CLOSE_BTN || button == KEY_ESC)
 		cube_exit(p);
 	else if (button == KEY_UP)

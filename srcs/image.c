@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 10:45:46 by romain            #+#    #+#             */
-/*   Updated: 2024/04/26 12:43:19 by romain           ###   ########.fr       */
+/*   Updated: 2024/04/30 12:25:31 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,54 @@ t_img	get_new_image(t_params *p)
 	return (image);
 }
 
+double	get_angle(t_vector a, t_vector b)
+{
+	double	denominator;
+
+	denominator = sqrtl(a.x * a.x + a.y * a.y) * sqrtl(b.x * b.x + b.y * b.y);
+	return (acos((a.x * b.x + a.y * b.y) / denominator));
+}
+void	second_part(t_calc_values *c, double angle)
+{
+	if (angle <= 3 * M_PI_2)
+	{
+		if (c->side == False)
+			c->wall_ori = NO;
+		else
+			c->wall_ori = EA;
+	}
+	else
+	{
+		if (c->side == False)
+			c->wall_ori = SO;
+		else
+			c->wall_ori = EA;
+	}
+}
+
+void	define_ori(t_calc_values *c)
+{
+	double	angle;
+
+	angle = atan2(c->rayDir.y, c->rayDir.x) + M_PI;
+	if (angle <= M_PI_2)
+	{
+		if (c->side == False)
+			c->wall_ori = SO;
+		else
+			c->wall_ori = WE;
+	}
+	else if (angle <= 2 * M_PI_2)
+	{
+		if (c->side == False)
+			c->wall_ori = NO;
+		else
+			c->wall_ori = WE;
+	}
+	else
+		second_part(c, angle);
+}
+
 void	calc_image(t_params *p, t_img img)
 {
 	t_calc_values	c;
@@ -131,27 +179,23 @@ void	calc_image(t_params *p, t_img img)
 		drawEnd = lineHeight / 2 + SHEIGHT / 2;
 		if (drawEnd >= SHEIGHT)
 			drawEnd = SHEIGHT - 1;
-		switch (p->map[c.mapX][c.mapY])
+		switch (c.wall_ori)
 		{
-		case 1:
-			color = COLOR_RED;
-			break ; // red
-		case 2:
-			color = COLOR_GREEN;
-			break ; // green
-		case 3:
+		case NO:
 			color = COLOR_BLUE;
-			break ; // blue
-		case 4:
-			color = 0;
-			break ; // white
-		default:
+			break ;
+		case SO:
+			color = COLOR_GREEN;
+			break ;
+		case EA:
+			color = COLOR_RED;
+			break ;
+		case WE:
 			color = COLOR_YELLOW;
-			break ; // yellow
-		}
-		if (c.side == 1)
-		{
-			color = color / 2;
+			break ;
+		default:
+			color = COLOR_WHITE;
+			break ;
 		}
 		draw_ver_line(x, drawStart, drawEnd, img, color);
 	}

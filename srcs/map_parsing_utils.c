@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:25:22 by romain            #+#    #+#             */
-/*   Updated: 2024/04/12 13:59:56 by romain           ###   ########.fr       */
+/*   Updated: 2024/04/29 17:11:27 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,16 @@ void	set_color(int *color, const char *line, t_params *p)
 
 void	set_ti(void **texture, const char *line, t_params *p)
 {
-	int	size;
+	int	height;
+	int	widht;
 
-	size = 40;
+	height = SHEIGHT;
+	widht = SWIDTH;
 	while (!is_space(*line))
 		line++;
 	while (is_space(*line))
 		line++;
-	*texture = mlx_xpm_file_to_image(p->w.mlx, (char *)line, &size, &size);
+	*texture = mlx_xpm_file_to_image(p->w.mlx, (char *)line, &widht, &height);
 	if (!*texture)
 		map_error(*p, 1, line);
 }

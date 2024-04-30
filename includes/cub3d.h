@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:52:13 by romain            #+#    #+#             */
-/*   Updated: 2024/04/26 12:43:13 by romain           ###   ########.fr       */
+/*   Updated: 2024/04/29 20:42:03 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 # include <unistd.h>
 
 // SCREEN
-# define SWIDTH 600
-# define SHEIGHT 400
+# define SWIDTH 1200
+# define SHEIGHT 800
 
 // KEY
 # define EVENT_CLOSE_BTN 1869819968
@@ -49,12 +49,6 @@
 
 # define FOV 0.66
 
-typedef enum e_bool
-{
-	False,
-	True
-}				t_bool;
-
 typedef enum e_type_def
 {
 	NONE,
@@ -65,6 +59,12 @@ typedef enum e_type_def
 	F,
 	C
 }				t_type_def;
+
+typedef enum e_bool
+{
+	False,
+	True
+}				t_bool;
 
 typedef struct s_vector
 {
@@ -114,7 +114,9 @@ typedef struct s_calc_values
 	t_vector	deltaDist;
 	t_vector	rayDir;
 	t_vector	sideDist;
+	t_type_def	wall_ori;
 	t_bool		side;
+
 }				t_calc_values;
 
 t_img			get_new_image(t_params *p);
@@ -149,6 +151,8 @@ void			draw_ver_line(int line, int start, int end, t_img img,
 					int color);
 double			get_perpwalldist(t_calc_values cv);
 void			set_player_position(t_params *p);
+void			define_ori(t_calc_values *c);
+double			get_angle(t_vector a, t_vector b);
 
 // RUNNING
 void			run(t_params *p);
