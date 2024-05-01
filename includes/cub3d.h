@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:52:13 by romain            #+#    #+#             */
-/*   Updated: 2024/04/29 20:42:03 by romain           ###   ########.fr       */
+/*   Updated: 2024/05/01 11:27:39 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@
 // SCREEN
 # define SWIDTH 1200
 # define SHEIGHT 800
-
+# define TEXHEIGHT 64
+# define TEXWIDHT 64
 // KEY
 # define EVENT_CLOSE_BTN 1869819968
 # define KEY_ESC 65307
@@ -111,6 +112,8 @@ typedef struct s_calc_values
 	int			mapY;
 	int			stepX;
 	int			stepY;
+	int			start;
+	int			end;
 	t_vector	deltaDist;
 	t_vector	rayDir;
 	t_vector	sideDist;
@@ -120,7 +123,7 @@ typedef struct s_calc_values
 }				t_calc_values;
 
 t_img			get_new_image(t_params *p);
-void			calc_image(t_params *p, t_img img);
+void			calc_image(t_params *p);
 
 // MAP PARSING
 void			get_map(t_params *p, char *path);
@@ -147,8 +150,8 @@ int				close_event(t_params *p);
 int				is_hit(t_params *p, t_calc_values *cv);
 void			calc_side_dist(t_params *p, t_calc_values *cv);
 void			dist(t_params *p, t_calc_values *c, double camX);
-void			draw_ver_line(int line, int start, int end, t_img img,
-					int color);
+void			draw_ver_line(t_calc_values *c, t_params *p, int col_nbr,
+					double perpWallDist);
 double			get_perpwalldist(t_calc_values cv);
 void			set_player_position(t_params *p);
 void			define_ori(t_calc_values *c);

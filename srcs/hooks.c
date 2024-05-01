@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 10:41:30 by romain            #+#    #+#             */
-/*   Updated: 2024/04/29 17:13:35 by romain           ###   ########.fr       */
+/*   Updated: 2024/05/01 10:43:23 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ void	display_new_image(t_params *p)
 	buf = p->w.cur_img;
 	p->w.cur_img = p->w.cache_img;
 	p->w.cache_img = buf;
-	reset_img_color(p, p->w.cur_img);
-	calc_image(p, p->w.cur_img);
+	calc_image(p);
 	mlx_put_image_to_window(p->w.mlx, p->w.mlx_win, p->w.cur_img.img, 0, 0);
 }
 

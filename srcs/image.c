@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 10:45:46 by romain            #+#    #+#             */
-/*   Updated: 2024/04/30 12:25:31 by romain           ###   ########.fr       */
+/*   Updated: 2024/05/01 10:55:39 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	run(t_params *p)
 	display_params(p);
 	p->w.cur_img = get_new_image(p);
 	p->w.cache_img = get_new_image(p);
-	calc_image(p, p->w.cur_img);
+	calc_image(p);
 	mlx_put_image_to_window(p->w.mlx, p->w.mlx_win, p->w.cur_img.img, 0, 0);
 	loop(p);
 }
@@ -153,17 +153,12 @@ void	define_ori(t_calc_values *c)
 		second_part(c, angle);
 }
 
-void	calc_image(t_params *p, t_img img)
+void	calc_image(t_params *p)
 {
 	t_calc_values	c;
-	double			perpWallDist;
-	int				lineHeight;
-	int				drawStart;
-	int				drawEnd;
 	int				x;
-	int				color;
 
-	reset_img_color(p, img);
+	reset_img_color(p, p->w.cur_img);
 	x = -1;
 	while (++x < SWIDTH)
 	{
@@ -171,32 +166,6 @@ void	calc_image(t_params *p, t_img img)
 		calc_side_dist(p, &c);
 		while (!is_hit(p, &c))
 			;
-		perpWallDist = get_perpwalldist(c);
-		lineHeight = (int)(SHEIGHT / perpWallDist);
-		drawStart = -lineHeight / 2 + SHEIGHT / 2;
-		if (drawStart < 0)
-			drawStart = 0;
-		drawEnd = lineHeight / 2 + SHEIGHT / 2;
-		if (drawEnd >= SHEIGHT)
-			drawEnd = SHEIGHT - 1;
-		switch (c.wall_ori)
-		{
-		case NO:
-			color = COLOR_BLUE;
-			break ;
-		case SO:
-			color = COLOR_GREEN;
-			break ;
-		case EA:
-			color = COLOR_RED;
-			break ;
-		case WE:
-			color = COLOR_YELLOW;
-			break ;
-		default:
-			color = COLOR_WHITE;
-			break ;
-		}
-		draw_ver_line(x, drawStart, drawEnd, img, color);
+		draw_ver_line(&c, p, x, get_perpwalldist(c));
 	}
 }

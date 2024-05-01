@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 12:01:06 by romain            #+#    #+#             */
-/*   Updated: 2024/04/29 20:36:52 by romain           ###   ########.fr       */
+/*   Updated: 2024/05/01 11:16:47 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,50 @@ double	get_perpwalldist(t_calc_values cv)
 		return (cv.sideDist.y - cv.deltaDist.y);
 }
 
-void	draw_ver_line(int col_nbr, int start, int end, t_img img, int color)
+void	putline(t_params *p, t_calc_values *c, int color, int col_nbr)
 {
 	char	*dst;
 
-	while (start < end)
+	while (c->start < c->end)
 	{
-		dst = img.addr + (start++ * img.line_length + col_nbr
-				* (img.bits_per_pixel / 8));
+		dst = p->w.cur_img.addr + (c->start++ * p->w.cur_img.line_length
+				+ col_nbr * (p->w.cur_img.bits_per_pixel / 8));
 		*(unsigned int *)dst = color;
 	}
+}
+
+void	draw_ver_line(t_calc_values *c, t_params *p, int col_nbr,
+		double perpWallDist)
+{
+	int	lineHeight;
+	int	color;
+
+	lineHeight = (int)(SHEIGHT / perpWallDist);
+	c->start = -lineHeight / 2 + SHEIGHT / 2;
+	if (c->start < 0)
+		c->start = 0;
+	c->end = lineHeight / 2 + SHEIGHT / 2;
+	if (c->end >= SHEIGHT)
+		c->end = SHEIGHT - 1;
+	switch (c->wall_ori)
+	{
+	case NO:
+		color = COLOR_BLUE;
+		break ;
+	case SO:
+		color = COLOR_GREEN;
+		break ;
+	case EA:
+		color = COLOR_RED;
+		break ;
+	case WE:
+		color = COLOR_YELLOW;
+		break ;
+	default:
+		color = COLOR_WHITE;
+		break ;
+	}
+	putline(p, c, color, col_nbr);
 }
 
 void	reset_img_color(t_params *p, t_img img)
