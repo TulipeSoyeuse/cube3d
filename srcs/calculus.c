@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 12:01:06 by romain            #+#    #+#             */
-/*   Updated: 2024/05/01 11:16:47 by romain           ###   ########.fr       */
+/*   Updated: 2024/05/01 21:16:54 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,58 +74,71 @@ void	dist(t_params *p, t_calc_values *c, double camX)
 		c->deltaDist.y = fabs(1 / c->rayDir.y);
 }
 
-double	get_perpwalldist(t_calc_values cv)
+void	get_perpwalldist(t_calc_values *cv)
 {
-	if (cv.side == False)
-		return (cv.sideDist.x - cv.deltaDist.x);
+	if (cv->side == False)
+		cv->perpwalldist = cv->sideDist.x - cv->deltaDist.x;
 	else
-		return (cv.sideDist.y - cv.deltaDist.y);
+		cv->perpwalldist = cv->sideDist.y - cv->deltaDist.y;
 }
 
-void	putline(t_params *p, t_calc_values *c, int color, int col_nbr)
+t_img	get_texture(t_params *p, t_calc_values *c)
+{
+	if (c->wall_ori == NO)
+		return (p->no_texture);
+	if (c->wall_ori == SO)
+		return (p->so_texture);
+	if (c->wall_ori == EA)
+		return (p->ea_texture);
+	return (p->we_texture);
+}
+
+void	putline(t_params *p, t_calc_values *c, int col_nbr)
 {
 	char	*dst;
+	int		texX;
+	double	step;
+	double	texPos;
+	int		texY;
+	void	*color;
+	t_img	texture;
+	double	wallX;
 
+	texture = get_texture(p, c);
+	if (c->side == 0)
+		wallX = p->p_pos.y + c->perpwalldist * c->rayDir.y;
+	else
+		wallX = p->p_pos.x + c->perpwalldist * c->rayDir.x;
+	wallX -= floor((wallX));
+	texX = wallX * (double)texture.effective_widht;
+	if (c->side == 0 && c->rayDir.x > 0)
+		texX = texture.effective_widht - texX - 1;
+	if (c->side == 0 && c->rayDir.y < 0)
+		texX = texture.effective_widht - texX - 1;
+	step = 1.0 * texture.effective_height / c->lineheight;
+	texPos = (c->start - SHEIGHT / 2 + c->lineheight / 2) * step;
 	while (c->start < c->end)
 	{
+		texY = (int)texPos & (texture.line_length - 1);
+		texPos += step;
+		color = texture.addr + ((texture.line_length * texY) + texX
+				* (p->w.cur_img.bits_per_pixel / 8));
 		dst = p->w.cur_img.addr + (c->start++ * p->w.cur_img.line_length
 				+ col_nbr * (p->w.cur_img.bits_per_pixel / 8));
-		*(unsigned int *)dst = color;
+		*(unsigned int *)dst = *(unsigned int *)color;
 	}
 }
 
-void	draw_ver_line(t_calc_values *c, t_params *p, int col_nbr,
-		double perpWallDist)
+void	draw_ver_line(t_calc_values *c, t_params *p, int col_nbr)
 {
-	int	lineHeight;
-	int	color;
-
-	lineHeight = (int)(SHEIGHT / perpWallDist);
-	c->start = -lineHeight / 2 + SHEIGHT / 2;
+	c->lineheight = (int)(SHEIGHT / c->perpwalldist);
+	c->start = -c->lineheight / 2 + SHEIGHT / 2;
 	if (c->start < 0)
 		c->start = 0;
-	c->end = lineHeight / 2 + SHEIGHT / 2;
+	c->end = c->lineheight / 2 + SHEIGHT / 2;
 	if (c->end >= SHEIGHT)
 		c->end = SHEIGHT - 1;
-	switch (c->wall_ori)
-	{
-	case NO:
-		color = COLOR_BLUE;
-		break ;
-	case SO:
-		color = COLOR_GREEN;
-		break ;
-	case EA:
-		color = COLOR_RED;
-		break ;
-	case WE:
-		color = COLOR_YELLOW;
-		break ;
-	default:
-		color = COLOR_WHITE;
-		break ;
-	}
-	putline(p, c, color, col_nbr);
+	putline(p, c, col_nbr);
 }
 
 void	reset_img_color(t_params *p, t_img img)

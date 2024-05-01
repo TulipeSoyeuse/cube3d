@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:10:32 by romain            #+#    #+#             */
-/*   Updated: 2024/04/26 11:55:50 by romain           ###   ########.fr       */
+/*   Updated: 2024/05/01 12:25:45 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ void	display_params(t_params *p)
 
 	printf("f_color:%x\n", p->f_color);
 	printf("c_color:%x\n", p->c_color);
-	printf("\nno_texture:%p\n", p->no_texture);
-	printf("so_texture:%p\n", p->so_texture);
-	printf("ea_texture:%p\n", p->ea_texture);
-	printf("we_texture:%p\n", p->we_texture);
+	printf("\nno_texture:%p\n", p->no_texture.addr);
+	printf("so_texture:%p\n", p->so_texture.addr);
+	printf("ea_texture:%p\n", p->ea_texture.addr);
+	printf("we_texture:%p\n", p->we_texture.addr);
 	printf("\npos:%f %f\n", p->p_pos.x, p->p_pos.y);
 	printf("dir:%f %f\n", p->p_dir.x, p->p_dir.y);
 	printf("plane:%f %f\n", p->plane.x, p->plane.y);

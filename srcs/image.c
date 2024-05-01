@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 10:45:46 by romain            #+#    #+#             */
-/*   Updated: 2024/05/01 10:55:39 by romain           ###   ########.fr       */
+/*   Updated: 2024/05/01 21:16:24 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	set_plane(t_params *p, char c)
 {
 	if (c == 'N' || c == 'S')
 	{
-		printf("PING %c\n", c);
 		p->plane.x = FOV;
 		p->plane.y = 0;
 	}
@@ -62,7 +61,6 @@ void	set_player_position(t_params *p)
 	char	*line;
 
 	i = 0;
-	printf("setting player pos\n");
 	while (p->map[i])
 	{
 		line = p->map[i];
@@ -166,6 +164,7 @@ void	calc_image(t_params *p)
 		calc_side_dist(p, &c);
 		while (!is_hit(p, &c))
 			;
-		draw_ver_line(&c, p, x, get_perpwalldist(c));
+		get_perpwalldist(&c);
+		draw_ver_line(&c, p, x);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:52:13 by romain            #+#    #+#             */
-/*   Updated: 2024/05/01 11:27:39 by romain           ###   ########.fr       */
+/*   Updated: 2024/05/01 20:39:53 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ typedef struct s_img
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
+	int			effective_height;
+	int			effective_widht;
 }				t_img;
 
 typedef struct s_window
@@ -97,10 +99,10 @@ typedef struct s_params
 	t_vector	p_pos;
 	t_vector	p_dir;
 	t_vector	plane;
-	void		*no_texture;
-	void		*so_texture;
-	void		*we_texture;
-	void		*ea_texture;
+	t_img		no_texture;
+	t_img		so_texture;
+	t_img		we_texture;
+	t_img		ea_texture;
 	char		**map;
 	int			f_color;
 	int			c_color;
@@ -114,6 +116,8 @@ typedef struct s_calc_values
 	int			stepY;
 	int			start;
 	int			end;
+	double		perpwalldist;
+	int			lineheight;
 	t_vector	deltaDist;
 	t_vector	rayDir;
 	t_vector	sideDist;
@@ -150,9 +154,8 @@ int				close_event(t_params *p);
 int				is_hit(t_params *p, t_calc_values *cv);
 void			calc_side_dist(t_params *p, t_calc_values *cv);
 void			dist(t_params *p, t_calc_values *c, double camX);
-void			draw_ver_line(t_calc_values *c, t_params *p, int col_nbr,
-					double perpWallDist);
-double			get_perpwalldist(t_calc_values cv);
+void			draw_ver_line(t_calc_values *c, t_params *p, int col_nbr);
+void			get_perpwalldist(t_calc_values *cv);
 void			set_player_position(t_params *p);
 void			define_ori(t_calc_values *c);
 double			get_angle(t_vector a, t_vector b);

@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 13:05:05 by romain            #+#    #+#             */
-/*   Updated: 2024/04/13 12:30:51 by romain           ###   ########.fr       */
+/*   Updated: 2024/05/01 12:37:12 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ void	map_cleanup(char **map)
 
 void	cleanup(t_params *p)
 {
-	if (p->ea_texture)
-		mlx_destroy_image(p->w.mlx, p->ea_texture);
-	if (p->no_texture)
-		mlx_destroy_image(p->w.mlx, p->no_texture);
-	if (p->so_texture)
-		mlx_destroy_image(p->w.mlx, p->so_texture);
-	if (p->we_texture)
-		mlx_destroy_image(p->w.mlx, p->we_texture);
+	if (p->ea_texture.img)
+		mlx_destroy_image(p->w.mlx, p->ea_texture.img);
+	if (p->no_texture.img)
+		mlx_destroy_image(p->w.mlx, p->no_texture.img);
+	if (p->so_texture.img)
+		mlx_destroy_image(p->w.mlx, p->so_texture.img);
+	if (p->we_texture.img)
+		mlx_destroy_image(p->w.mlx, p->we_texture.img);
 	if (p->w.cache_img.img)
 		mlx_destroy_image(p->w.mlx, p->w.cache_img.img);
 	if (p->w.cur_img.img)

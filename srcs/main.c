@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 15:02:35 by romain            #+#    #+#             */
-/*   Updated: 2024/04/23 12:57:21 by romain           ###   ########.fr       */
+/*   Updated: 2024/05/01 12:37:31 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ t_params	init(char *path)
 	p.f_color = 0;
 	p.w.mlx = NULL;
 	p.w.mlx_win = NULL;
-	p.ea_texture = NULL;
-	p.no_texture = NULL;
-	p.so_texture = NULL;
-	p.we_texture = NULL;
+	p.ea_texture.img = NULL;
+	p.no_texture.img = NULL;
+	p.so_texture.img = NULL;
+	p.we_texture.img = NULL;
 	p.w.cache_img.img = NULL;
 	p.w.cur_img.img = NULL;
 	p.w.mlx = mlx_init();

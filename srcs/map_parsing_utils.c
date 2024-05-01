@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:25:22 by romain            #+#    #+#             */
-/*   Updated: 2024/04/29 17:11:27 by romain           ###   ########.fr       */
+/*   Updated: 2024/05/01 12:37:36 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,19 +63,26 @@ void	set_color(int *color, const char *line, t_params *p)
 	*color = rgb_to_hex(r, g, b);
 }
 
-void	set_ti(void **texture, const char *line, t_params *p)
+void	set_ti(t_img *texture, const char *line, t_params *p)
 {
 	int	height;
 	int	widht;
 
-	height = SHEIGHT;
-	widht = SWIDTH;
+	height = TEXHEIGHT;
+	widht = TEXWIDHT;
 	while (!is_space(*line))
 		line++;
 	while (is_space(*line))
 		line++;
-	*texture = mlx_xpm_file_to_image(p->w.mlx, (char *)line, &widht, &height);
-	if (!*texture)
+	texture->img = mlx_xpm_file_to_image(p->w.mlx, (char *)line, &widht,
+			&height);
+	texture->effective_height = height;
+	texture->effective_widht = widht;
+	if (!texture->img)
+		map_error(*p, 1, line);
+	texture->addr = mlx_get_data_addr(texture->img, &texture->bits_per_pixel,
+			&texture->line_length, &texture->endian);
+	if (!texture->img)
 		map_error(*p, 1, line);
 }
 
