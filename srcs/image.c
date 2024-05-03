@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 10:45:46 by romain            #+#    #+#             */
-/*   Updated: 2024/05/01 21:16:24 by romain           ###   ########.fr       */
+/*   Updated: 2024/05/03 14:35:27 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	set_player_position(t_params *p)
 		{
 			if (set_dir(p, line[j]))
 			{
+				p->map[i][j] = '0';
 				p->p_pos.x = i;
 				p->p_pos.y = j;
 				return ;
@@ -79,12 +80,27 @@ void	set_player_position(t_params *p)
 	}
 }
 
+void	set_info(t_params *p)
+{
+	char	*s;
+	int		len;
+	char	*exp;
+
+	exp = "pos : %f - %f";
+	len = snprintf(NULL, 0, exp, p->p_pos.x, p->p_pos.y);
+	s = malloc(len + 1);
+	snprintf(s, len + 1, exp, p->p_pos.x, p->p_pos.y);
+	mlx_string_put(p->w.mlx, p->w.mlx_win, 0, 0, 0xFFFFFF, s);
+	free(s);
+}
+
 void	run(t_params *p)
 {
 	display_params(p);
 	p->w.cur_img = get_new_image(p);
 	p->w.cache_img = get_new_image(p);
 	calc_image(p);
+	set_info(p);
 	mlx_put_image_to_window(p->w.mlx, p->w.mlx_win, p->w.cur_img.img, 0, 0);
 	loop(p);
 }
