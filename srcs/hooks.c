@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 10:41:30 by romain            #+#    #+#             */
-/*   Updated: 2024/07/17 13:48:05 by romain           ###   ########.fr       */
+/*   Updated: 2024/07/17 14:27:25 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,85 +29,48 @@ void	display_new_image(t_params *p)
 	mlx_put_image_to_window(p->w.mlx, p->w.mlx_win, p->w.cur_img.img, 0, 0);
 }
 
-void	move_down(t_params *p)
-{
-	if (p->map[(int)(p->p_pos.x + p->p_dir.x
-			* MOVESPEED)][(int)p->p_pos.y] != '1')
-		p->p_pos.x -= p->p_dir.x * MOVESPEED;
-	if (p->map[(int)p->p_pos.x][(int)(p->p_pos.y + p->p_dir.y
-			* MOVESPEED)] != '1')
-		p->p_pos.y -= p->p_dir.y * MOVESPEED;
-}
-
-void	move_up(t_params *p)
-{
-	if (p->map[(int)(p->p_pos.x + p->p_dir.x
-			* MOVESPEED)][(int)p->p_pos.y] != '1')
-		p->p_pos.x += p->p_dir.x * MOVESPEED;
-	if (p->map[(int)p->p_pos.x][(int)(p->p_pos.y + p->p_dir.y
-			* MOVESPEED)] != '1')
-		p->p_pos.y += p->p_dir.y * MOVESPEED;
-}
-
-void	move_left(t_params *p)
-{
-	if (p->map[(int)(p->p_pos.x + p->p_dir.x
-			* MOVESPEED)][(int)p->p_pos.y] != '1')
-		p->p_pos.x += -p->p_dir.y * MOVESPEED;
-	if (p->map[(int)p->p_pos.x][(int)(p->p_pos.y + p->p_dir.y
-			* MOVESPEED)] != '1')
-		p->p_pos.y += p->p_dir.x * MOVESPEED;
-}
-
-void	move_right(t_params *p)
-{
-	if (p->map[(int)(p->p_pos.x + p->p_dir.x
-			* MOVESPEED)][(int)p->p_pos.y] != '1')
-		p->p_pos.x += p->p_dir.y * MOVESPEED;
-	if (p->map[(int)p->p_pos.x][(int)(p->p_pos.y + p->p_dir.y
-			* MOVESPEED)] != '1')
-		p->p_pos.y += -p->p_dir.x * MOVESPEED;
-}
-
 void	look_right(t_params *p)
 {
-	double	oldDirX;
-	double	oldPlaneX;
+	double	olddirx;
+	double	oldplanex;
 
-	oldDirX = p->p_dir.x;
+	olddirx = p->p_dir.x;
 	p->p_dir.x = p->p_dir.x * cos(-ROTATION_SPEED) - p->p_dir.y
 		* sin(-ROTATION_SPEED);
-	p->p_dir.y = oldDirX * sin(-ROTATION_SPEED) + p->p_dir.y
+	p->p_dir.y = olddirx * sin(-ROTATION_SPEED) + p->p_dir.y
 		* cos(-ROTATION_SPEED);
-	oldPlaneX = p->plane.x;
+	oldplanex = p->plane.x;
 	p->plane.x = p->plane.x * cos(-ROTATION_SPEED) - p->plane.y
 		* sin(-ROTATION_SPEED);
-	p->plane.y = oldPlaneX * sin(-ROTATION_SPEED) + p->plane.y
+	p->plane.y = oldplanex * sin(-ROTATION_SPEED) + p->plane.y
 		* cos(-ROTATION_SPEED);
 }
 
 void	look_left(t_params *p)
 {
-	double	oldDirX;
-	double	oldPlaneX;
+	double	olddirx;
+	double	oldplanex;
 
-	oldDirX = p->p_dir.x;
+	olddirx = p->p_dir.x;
 	p->p_dir.x = p->p_dir.x * cos(ROTATION_SPEED) - p->p_dir.y
 		* sin(ROTATION_SPEED);
-	p->p_dir.y = oldDirX * sin(ROTATION_SPEED) + p->p_dir.y
+	p->p_dir.y = olddirx * sin(ROTATION_SPEED) + p->p_dir.y
 		* cos(ROTATION_SPEED);
-	oldPlaneX = p->plane.x;
+	oldplanex = p->plane.x;
 	p->plane.x = p->plane.x * cos(ROTATION_SPEED) - p->plane.y
 		* sin(ROTATION_SPEED);
-	p->plane.y = oldPlaneX * sin(ROTATION_SPEED) + p->plane.y
+	p->plane.y = oldplanex * sin(ROTATION_SPEED) + p->plane.y
 		* cos(ROTATION_SPEED);
 }
 
 int	key_hook(int button, t_params *p)
 {
-	printf("%d", button);
 	if (button == EVENT_CLOSE_BTN || button == KEY_ESC)
 		cube_exit(p);
+	else if (button == LEFT_ARROW)
+		look_left(p);
+	else if (button == RIGHT_ARROW)
+		look_right(p);
 	else if (button == KEY_UP)
 		move_up(p);
 	else if (button == KEY_DOWN)

@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:52:13 by romain            #+#    #+#             */
-/*   Updated: 2024/07/17 13:53:03 by romain           ###   ########.fr       */
+/*   Updated: 2024/07/17 14:28:15 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,21 +112,33 @@ typedef struct s_params
 
 typedef struct s_calc_values
 {
-	int			mapX;
-	int			mapY;
-	int			stepX;
-	int			stepY;
+	int			mapx;
+	int			mapy;
+	int			stepx;
+	int			stepy;
 	int			start;
 	int			end;
 	double		perpwalldist;
 	int			lineheight;
-	t_vector	deltaDist;
-	t_vector	rayDir;
-	t_vector	sideDist;
+	t_vector	deltadist;
+	t_vector	raydir;
+	t_vector	sidedist;
 	t_type_def	wall_ori;
 	t_bool		side;
 
 }				t_calc_values;
+
+typedef struct s_putline_val
+{
+	char		*dst;
+	int			texx;
+	double		step;
+	double		texpos;
+	int			texy;
+	void		*color;
+	t_img		texture;
+	double		wallx;
+}				t_putline_val;
 
 t_img			get_new_image(t_params *p);
 void			calc_image(t_params *p);
@@ -161,6 +173,7 @@ void			get_perpwalldist(t_calc_values *cv);
 void			set_player_position(t_params *p);
 void			define_ori(t_calc_values *c);
 double			get_angle(t_vector a, t_vector b);
+t_img			get_texture(t_params *p, t_calc_values *c);
 
 // RUNNING
 void			run(t_params *p);
@@ -169,4 +182,17 @@ void			reset_img_color(t_params *p, t_img img);
 
 // HOOKS
 int				key_hook(int button, t_params *p);
+
+// CAMERA MOVE
+void			move_down(t_params *p);
+void			move_up(t_params *p);
+void			move_left(t_params *p);
+void			move_right(t_params *p);
+
+// IMAGE SETTER
+int				set_plane(t_params *p, char c);
+int				set_dir(t_params *p, char c);
+void			set_player_position(t_params *p);
+void			set_info(t_params *p);
+double			get_angle(t_vector a, t_vector b);
 #endif

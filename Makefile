@@ -6,13 +6,15 @@
 #    By: romain <romain@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/10 14:30:15 by romain            #+#    #+#              #
-#    Updated: 2024/07/17 13:52:30 by romain           ###   ########.fr        #
+#    Updated: 2024/07/17 14:25:38 by romain           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC_FILES 		=	main.c	image.c	map_parsing_utils.c \
 					map.c	utils.c	window.c	cleanup.c \
-					map_checker.c calculus.c	hooks.c
+					map_checker.c calculus.c	hooks.c \
+					camera.c	image_setter.c	calculus2.c \
+					utils2.c
 
 SRC_DIR 		= srcs
 OBJ_DIR 		= objs
