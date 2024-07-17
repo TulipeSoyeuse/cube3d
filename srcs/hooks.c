@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 10:41:30 by romain            #+#    #+#             */
-/*   Updated: 2024/05/06 10:09:46 by romain           ###   ########.fr       */
+/*   Updated: 2024/07/17 13:48:05 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,27 @@ void	move_up(t_params *p)
 		p->p_pos.y += p->p_dir.y * MOVESPEED;
 }
 
+void	move_left(t_params *p)
+{
+	if (p->map[(int)(p->p_pos.x + p->p_dir.x
+			* MOVESPEED)][(int)p->p_pos.y] != '1')
+		p->p_pos.x += -p->p_dir.y * MOVESPEED;
+	if (p->map[(int)p->p_pos.x][(int)(p->p_pos.y + p->p_dir.y
+			* MOVESPEED)] != '1')
+		p->p_pos.y += p->p_dir.x * MOVESPEED;
+}
+
 void	move_right(t_params *p)
+{
+	if (p->map[(int)(p->p_pos.x + p->p_dir.x
+			* MOVESPEED)][(int)p->p_pos.y] != '1')
+		p->p_pos.x += p->p_dir.y * MOVESPEED;
+	if (p->map[(int)p->p_pos.x][(int)(p->p_pos.y + p->p_dir.y
+			* MOVESPEED)] != '1')
+		p->p_pos.y += -p->p_dir.x * MOVESPEED;
+}
+
+void	look_right(t_params *p)
 {
 	double	oldDirX;
 	double	oldPlaneX;
@@ -66,7 +86,7 @@ void	move_right(t_params *p)
 		* cos(-ROTATION_SPEED);
 }
 
-void	move_left(t_params *p)
+void	look_left(t_params *p)
 {
 	double	oldDirX;
 	double	oldPlaneX;
@@ -85,6 +105,7 @@ void	move_left(t_params *p)
 
 int	key_hook(int button, t_params *p)
 {
+	printf("%d", button);
 	if (button == EVENT_CLOSE_BTN || button == KEY_ESC)
 		cube_exit(p);
 	else if (button == KEY_UP)

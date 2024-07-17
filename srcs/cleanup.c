@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 13:05:05 by romain            #+#    #+#             */
-/*   Updated: 2024/05/01 12:37:12 by romain           ###   ########.fr       */
+/*   Updated: 2024/07/17 13:28:16 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	map_cleanup(char **map)
 		return ;
 	while (map[i])
 	{
-		// printf("%p - %d - %s\n", map[i], i, map[i]);
 		free(map[i++]);
 	}
 	free(map);
