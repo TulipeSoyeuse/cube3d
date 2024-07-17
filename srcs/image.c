@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 10:45:46 by romain            #+#    #+#             */
-/*   Updated: 2024/05/03 14:35:27 by romain           ###   ########.fr       */
+/*   Updated: 2024/05/06 10:07:28 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ int	set_plane(t_params *p, char c)
 {
 	if (c == 'N' || c == 'S')
 	{
-		p->plane.x = FOV;
-		p->plane.y = 0;
+		p->plane.x = 0;
+		p->plane.y = FOV;
 	}
 	else if (c == 'E' || c == 'W')
 	{
-		p->plane.x = 0;
-		p->plane.y = FOV;
+		p->plane.x = FOV;
+		p->plane.y = 0;
 	}
 	return (1);
 }
@@ -31,23 +31,23 @@ int	set_dir(t_params *p, char c)
 {
 	if (c == 'N')
 	{
-		p->p_dir.x = 0;
-		p->p_dir.y = -1;
+		p->p_dir.x = -1;
+		p->p_dir.y = 0;
 	}
 	else if (c == 'S')
-	{
-		p->p_dir.x = 0;
-		p->p_dir.y = 1;
-	}
-	else if (c == 'E')
 	{
 		p->p_dir.x = 1;
 		p->p_dir.y = 0;
 	}
+	else if (c == 'E')
+	{
+		p->p_dir.x = 0;
+		p->p_dir.y = -1;
+	}
 	else if (c == 'W')
 	{
-		p->p_dir.x = -1;
-		p->p_dir.y = 0;
+		p->p_dir.x = 0;
+		p->p_dir.y = 1;
 	}
 	else
 		return (0);

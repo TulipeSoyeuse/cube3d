@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 10:41:30 by romain            #+#    #+#             */
-/*   Updated: 2024/05/01 10:43:23 by romain           ###   ########.fr       */
+/*   Updated: 2024/05/06 10:09:46 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	move_up(t_params *p)
 		p->p_pos.y += p->p_dir.y * MOVESPEED;
 }
 
-void	move_left(t_params *p)
+void	move_right(t_params *p)
 {
 	double	oldDirX;
 	double	oldPlaneX;
@@ -66,7 +66,7 @@ void	move_left(t_params *p)
 		* cos(-ROTATION_SPEED);
 }
 
-void	move_right(t_params *p)
+void	move_left(t_params *p)
 {
 	double	oldDirX;
 	double	oldPlaneX;
@@ -85,7 +85,6 @@ void	move_right(t_params *p)
 
 int	key_hook(int button, t_params *p)
 {
-	// printf("button pressed: %d\n", button);
 	if (button == EVENT_CLOSE_BTN || button == KEY_ESC)
 		cube_exit(p);
 	else if (button == KEY_UP)
