@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 10:41:30 by romain            #+#    #+#             */
-/*   Updated: 2024/07/17 14:27:25 by romain           ###   ########.fr       */
+/*   Updated: 2024/07/18 17:50:45 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,11 @@ void	look_right(t_params *p)
 	double	oldplanex;
 
 	olddirx = p->p_dir.x;
-	p->p_dir.x = p->p_dir.x * cos(-ROTATION_SPEED) - p->p_dir.y
-		* sin(-ROTATION_SPEED);
-	p->p_dir.y = olddirx * sin(-ROTATION_SPEED) + p->p_dir.y
-		* cos(-ROTATION_SPEED);
+	p->p_dir.x = p->p_dir.x * cos(-M_PI / 8) - p->p_dir.y * sin(-M_PI / 8);
+	p->p_dir.y = olddirx * sin(-M_PI / 8) + p->p_dir.y * cos(-M_PI / 8);
 	oldplanex = p->plane.x;
-	p->plane.x = p->plane.x * cos(-ROTATION_SPEED) - p->plane.y
-		* sin(-ROTATION_SPEED);
-	p->plane.y = oldplanex * sin(-ROTATION_SPEED) + p->plane.y
-		* cos(-ROTATION_SPEED);
+	p->plane.x = p->plane.x * cos(-M_PI / 8) - p->plane.y * sin(-M_PI / 8);
+	p->plane.y = oldplanex * sin(-M_PI / 8) + p->plane.y * cos(-M_PI / 8);
 }
 
 void	look_left(t_params *p)
@@ -52,15 +48,11 @@ void	look_left(t_params *p)
 	double	oldplanex;
 
 	olddirx = p->p_dir.x;
-	p->p_dir.x = p->p_dir.x * cos(ROTATION_SPEED) - p->p_dir.y
-		* sin(ROTATION_SPEED);
-	p->p_dir.y = olddirx * sin(ROTATION_SPEED) + p->p_dir.y
-		* cos(ROTATION_SPEED);
+	p->p_dir.x = p->p_dir.x * cos(M_PI / 8) - p->p_dir.y * sin(M_PI / 8);
+	p->p_dir.y = olddirx * sin(M_PI / 8) + p->p_dir.y * cos(M_PI / 8);
 	oldplanex = p->plane.x;
-	p->plane.x = p->plane.x * cos(ROTATION_SPEED) - p->plane.y
-		* sin(ROTATION_SPEED);
-	p->plane.y = oldplanex * sin(ROTATION_SPEED) + p->plane.y
-		* cos(ROTATION_SPEED);
+	p->plane.x = p->plane.x * cos(M_PI / 8) - p->plane.y * sin(M_PI / 8);
+	p->plane.y = oldplanex * sin(M_PI / 8) + p->plane.y * cos(M_PI / 8);
 }
 
 int	key_hook(int button, t_params *p)

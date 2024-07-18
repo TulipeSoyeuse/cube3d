@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:25:22 by romain            #+#    #+#             */
-/*   Updated: 2024/05/01 12:37:36 by romain           ###   ########.fr       */
+/*   Updated: 2024/07/18 17:52:38 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	rgb_to_hex(int r, int g, int b)
 {
-	return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
+	return (((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff));
 }
 
 t_type_def	get_identifier(const char *s)

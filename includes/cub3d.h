@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:52:13 by romain            #+#    #+#             */
-/*   Updated: 2024/07/17 14:28:15 by romain           ###   ########.fr       */
+/*   Updated: 2024/07/18 17:51:49 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@
 # define RIGHT_ARROW 65363
 
 # define MOVESPEED 0.5
-# define ROTATION_SPEED M_PI / 8
 
 # define COLOR_BLUE 0x003C43
 # define COLOR_RED 0xED4545
@@ -147,7 +146,7 @@ void			calc_image(t_params *p);
 void			get_map(t_params *p, char *path);
 char			**add_line(char **map, char *line);
 t_type_def		get_identifier(const char *s);
-void			set_identifier_handler(t_type_def, char *, t_params *);
+void			set_identifier_handler(t_type_def t, char *c, t_params *p);
 
 // UTILS
 int				is_space(int c);
