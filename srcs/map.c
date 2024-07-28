@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:10:32 by romain            #+#    #+#             */
-/*   Updated: 2024/05/01 12:25:45 by romain           ###   ########.fr       */
+/*   Updated: 2024/07/23 13:31:15 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	get_map(t_params *p, char *path)
 	if (fd == -1)
 		map_error(*p, 0);
 	read_map(fd, p);
-	// if (check_map(p->map))
-	// 	map_error(*p, 0);
+	if (check_map(p->map))
+		map_error(*p, 0);
 	close(fd);
 }

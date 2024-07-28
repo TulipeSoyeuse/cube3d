@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:52:13 by romain            #+#    #+#             */
-/*   Updated: 2024/07/18 17:51:49 by romain           ###   ########.fr       */
+/*   Updated: 2024/07/23 14:38:07 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,3 +195,6 @@ void			set_player_position(t_params *p);
 void			set_info(t_params *p);
 double			get_angle(t_vector a, t_vector b);
 #endif
+
+// CHECK MAP
+int				check_map(char **m);
