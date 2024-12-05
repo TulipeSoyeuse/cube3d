@@ -6,7 +6,7 @@
 #    By: romain <romain@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/10 14:30:15 by romain            #+#    #+#              #
-#    Updated: 2024/07/23 14:41:36 by romain           ###   ########.fr        #
+#    Updated: 2024/12/03 11:16:56 by romain           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ SRC_FILES 		=	main.c			image.c			map_parsing_utils.c \
 					map.c			utils.c			window.c \
 					calculus.c		hooks.c			camera.c \
 					image_setter.c	calculus2.c 	utils2.c \
-					check_map.c		cleanup.c
+					check_map.c		cleanup.c		check_map2.c
 
 SRC_DIR 		= srcs
 OBJ_DIR 		= objs
@@ -34,7 +34,7 @@ MINIGNL			= minignl/minignl.a
 UNAME			= $(shell uname)
 ifeq ($(UNAME), Darwin)
 Xext 			= /opt/homebrew/Cellar/libxext/1.3.6/lib
-X11 			= /opt/homebrew/Cellar/libx11/1.8.9/lib
+X11 			= /opt/homebrew/Cellar/libx11/1.8.10/lib
 LIBS			= -L$(Xext) -L$(X11) -lX11 -lXext -L$(dir $(MINILIBX)) -lmlx
 endif
 ifeq ($(UNAME), Linux)

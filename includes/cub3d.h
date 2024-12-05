@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:52:13 by romain            #+#    #+#             */
-/*   Updated: 2024/07/23 14:38:07 by romain           ###   ########.fr       */
+/*   Updated: 2024/12/03 12:19:00 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,11 @@
 # define COLOR_GREEN 0x5DAF00
 
 # define FOV 0.66
+
+// MAP CHECK
+# define EMPTY 2
+# define WALL 3
+# define GAME_SPACE 4
 
 typedef enum e_type_def
 {
@@ -194,7 +199,15 @@ int				set_dir(t_params *p, char c);
 void			set_player_position(t_params *p);
 void			set_info(t_params *p);
 double			get_angle(t_vector a, t_vector b);
-#endif
 
 // CHECK MAP
 int				check_map(char **m);
+int				check_map2(char **m);
+int				check_left_exterior_wall(char **m);
+int				check_right_exterior_wall(char **m);
+int				check_down_exterior_wall(char **m);
+int				check_up_exterior_wall(char **m);
+
+int				check_zero_map(char **m, int i, int j);
+
+#endif
