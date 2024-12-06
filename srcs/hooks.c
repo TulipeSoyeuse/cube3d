@@ -71,7 +71,7 @@ int	key_hook(int button, t_params *p)
 		move_left(p);
 	else if (button == KEY_RIGHT)
 		move_right(p);
-	display_params(p);
+	//display_params(p);
 	display_new_image(p);
 	return (0);
 }

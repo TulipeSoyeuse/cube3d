@@ -38,7 +38,7 @@ X11 			= /opt/homebrew/Cellar/libx11/1.8.10/lib
 LIBS			= -L$(Xext) -L$(X11) -lX11 -lXext -L$(dir $(MINILIBX)) -lmlx
 endif
 ifeq ($(UNAME), Linux)
-LIBS			= -L$(dir $(MINILIBX)) -lmlx
+LIBS			= -L$(dir $(MINILIBX)) -lmlx -lX11 -lXext -lm
 endif
 
 all: $(NAME)

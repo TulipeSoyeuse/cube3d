@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rdupeux <rdupeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 13:05:05 by romain            #+#    #+#             */
-/*   Updated: 2024/07/17 13:28:16 by romain           ###   ########.fr       */
+/*   Updated: 2024/12/06 13:44:25 by rdupeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	cleanup(t_params *p)
 		mlx_destroy_window(p->w.mlx, p->w.mlx_win);
 	if (p->w.mlx)
 		mlx_destroy_display(p->w.mlx);
+	if (p->w.mlx)
+		free(p->w.mlx);
 	map_cleanup(p->map);
 }
 

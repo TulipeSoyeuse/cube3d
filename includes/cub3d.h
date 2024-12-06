@@ -34,8 +34,8 @@
 // KEY
 # define EVENT_CLOSE_BTN 1869819968
 # define KEY_ESC 65307
-# define KEY_LEFT 113
-# define KEY_UP 122
+# define KEY_LEFT 97
+# define KEY_UP 119
 # define KEY_RIGHT 100
 # define KEY_DOWN 115
 # define LEFT_ARROW 65361
