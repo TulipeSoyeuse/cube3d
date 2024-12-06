@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rdupeux <rdupeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 11:19:17 by romain            #+#    #+#             */
-/*   Updated: 2024/12/03 12:20:37 by romain           ###   ########.fr       */
+/*   Updated: 2024/12/06 15:05:50 by rdupeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,7 @@ int	check_left_exterior_wall(char **m)
 			if (!m[i][j] || m[i][j] == '0')
 				return (1);
 			if (m[i][j] == '1')
-			{
-				// printf("left check -> line:%d char:%d\n", i, j);
 				break ;
-			}
 			j++;
 		}
 	}
@@ -50,10 +47,7 @@ int	check_right_exterior_wall(char **m)
 			if (!m[i][j] || m[i][j] == '0')
 				return (1);
 			if (m[i][j] == '1')
-			{
-				// printf("right check -> line:%d char:%d\n", i, j);
 				break ;
-			}
 			j--;
 		}
 	}
@@ -79,10 +73,7 @@ int	check_down_exterior_wall(char **m)
 			if (i == 0 || m[i][j] == '0')
 				return (1);
 			if (m[i][j] == '1')
-			{
-				// printf("down check -> line:%d char:%d\n", i, j);
 				break ;
-			}
 			i--;
 		}
 	}
@@ -108,10 +99,7 @@ int	check_up_exterior_wall(char **m)
 			if (i == map_len - 1 || m[i][j] == '0')
 				return (1);
 			if (m[i][j] == '1')
-			{
-				// printf("up check -> line:%d char:%d\n", i, j);
 				break ;
-			}
 			i++;
 		}
 	}

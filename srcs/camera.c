@@ -6,7 +6,7 @@
 /*   By: rdupeux <rdupeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 14:01:16 by romain            #+#    #+#             */
-/*   Updated: 2024/12/06 13:49:00 by rdupeux          ###   ########.fr       */
+/*   Updated: 2024/12/06 15:03:09 by rdupeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	move_down(t_params *p)
 	else
 		return ;
 	if (p->map[(int)p->p_pos.x][(int)(p->p_pos.y - p->p_dir.y
-			* MOVESPEED)] != '1')
+		* MOVESPEED)] != '1')
 		p->p_pos.y -= p->p_dir.y * MOVESPEED;
 }
 
@@ -32,7 +32,7 @@ void	move_up(t_params *p)
 	else
 		return ;
 	if (p->map[(int)p->p_pos.x][(int)(p->p_pos.y + p->p_dir.y
-			* MOVESPEED)] != '1')
+		* MOVESPEED)] != '1')
 		p->p_pos.y += p->p_dir.y * MOVESPEED;
 }
 
@@ -44,7 +44,7 @@ void	move_left(t_params *p)
 	else
 		return ;
 	if (p->map[(int)p->p_pos.x][(int)(p->p_pos.y + p->p_dir.x
-			* MOVESPEED)] != '1')
+		* MOVESPEED)] != '1')
 		p->p_pos.y += p->p_dir.x * MOVESPEED;
 }
 
@@ -56,6 +56,6 @@ void	move_right(t_params *p)
 	else
 		return ;
 	if (p->map[(int)p->p_pos.x][(int)(p->p_pos.y - p->p_dir.x
-			* MOVESPEED)] != '1')
+		* MOVESPEED)] != '1')
 		p->p_pos.y += -p->p_dir.x * MOVESPEED;
 }

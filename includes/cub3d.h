@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rdupeux <rdupeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:52:13 by romain            #+#    #+#             */
-/*   Updated: 2024/12/03 12:19:00 by romain           ###   ########.fr       */
+/*   Updated: 2024/12/06 15:10:20 by rdupeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ void			display_params(t_params *p);
 // EXIT
 void			map_error(t_params p, int argc, ...);
 void			cleanup(t_params *p);
-void			error(t_params *p);
+void			error(t_params *p, char *message);
 void			cube_exit(t_params *p);
 int				close_event(t_params *p);
 
@@ -197,7 +197,7 @@ void			move_right(t_params *p);
 int				set_plane(t_params *p, char c);
 int				set_dir(t_params *p, char c);
 void			set_player_position(t_params *p);
-void			set_info(t_params *p);
+// void			set_info(t_params *p);
 double			get_angle(t_vector a, t_vector b);
 
 // CHECK MAP

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rdupeux <rdupeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 13:31:39 by romain            #+#    #+#             */
-/*   Updated: 2024/12/03 12:21:20 by romain           ###   ########.fr       */
+/*   Updated: 2024/12/06 15:06:00 by rdupeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,10 @@ int	check_map(char **m)
 		while (m[i][j + 1])
 		{
 			if (m[i][j] == '0' && check_zero_map(m, i, j))
-			{
-				printf("return: %d %d", i, j);
 				return (1);
-			}
 			j++;
 		}
 		i++;
 	}
 	return (0);
-	// return (check_map2(m));
 }

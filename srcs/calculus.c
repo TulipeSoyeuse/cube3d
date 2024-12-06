@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calculus.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rdupeux <rdupeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 12:01:06 by romain            #+#    #+#             */
-/*   Updated: 2024/07/17 14:30:14 by romain           ###   ########.fr       */
+/*   Updated: 2024/12/06 15:02:41 by rdupeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	putline(t_params *p, t_calc_values *c, int col_nbr)
 		v.texpos += v.step;
 		v.color = v.texture.addr + ((v.texture.line_length * v.texy) + v.texx
 				* (p->w.cur_img.bits_per_pixel / 8));
-		v.dst = p->w.cur_img.addr + (c->start++ * p->w.cur_img.line_length
+		v.dst = p->w.cur_img.addr + ((c->start++) * p->w.cur_img.line_length
 				+ col_nbr * (p->w.cur_img.bits_per_pixel / 8));
 		*(unsigned int *)v.dst = *(unsigned int *)v.color;
 	}
@@ -65,7 +65,7 @@ void	reset_img_color(t_params *p, t_img img)
 		x = 0;
 		while (x < SWIDTH)
 		{
-			dst = img.addr + (y * img.line_length + x++ * (img.bits_per_pixel
+			dst = img.addr + (y * img.line_length + (x++) * (img.bits_per_pixel
 						/ 8));
 			if (y < SHEIGHT / 2)
 				*(unsigned int *)dst = p->c_color;

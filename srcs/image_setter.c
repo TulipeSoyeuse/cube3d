@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image_setter.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rdupeux <rdupeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 14:10:32 by romain            #+#    #+#             */
-/*   Updated: 2024/07/17 14:12:59 by romain           ###   ########.fr       */
+/*   Updated: 2024/12/06 15:10:11 by rdupeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,15 @@ void	set_player_position(t_params *p)
 	}
 }
 
-void	set_info(t_params *p)
+double	get_angle(t_vector a, t_vector b)
+{
+	double	denominator;
+
+	denominator = sqrtl(a.x * a.x + a.y * a.y) * sqrtl(b.x * b.x + b.y * b.y);
+	return (acos((a.x * b.x + a.y * b.y) / denominator));
+}
+
+/* void	set_info(t_params *p)
 {
 	char	*s;
 	int		len;
@@ -92,12 +100,4 @@ void	set_info(t_params *p)
 	snprintf(s, len + 1, exp, p->p_pos.x, p->p_pos.y);
 	mlx_string_put(p->w.mlx, p->w.mlx_win, 0, 0, 0xFFFFFF, s);
 	free(s);
-}
-
-double	get_angle(t_vector a, t_vector b)
-{
-	double	denominator;
-
-	denominator = sqrtl(a.x * a.x + a.y * a.y) * sqrtl(b.x * b.x + b.y * b.y);
-	return (acos((a.x * b.x + a.y * b.y) / denominator));
-}
+} */

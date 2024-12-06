@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: romain <romain@student.42.fr>              +#+  +:+       +#+         #
+#    By: rdupeux <rdupeux@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/10 14:30:15 by romain            #+#    #+#              #
-#    Updated: 2024/12/03 11:16:56 by romain           ###   ########.fr        #
+#    Updated: 2024/12/06 14:16:55 by rdupeux          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,8 @@ HEADER			= $(HEADER_DIR)/cub3d.h
 LIBFT			= libft/libft.a
 CC				= cc
 CFLAGS 			= -Wextra -Wall -Werror
-NAME			= cube3d
-NAME_debug		= cube3d_debug
+NAME			= cub3D
+NAME_debug		= cub3D_debug
 MINILIBX		= minilibx-linux/libmlx.a
 MINIGNL			= minignl/minignl.a
 
@@ -54,7 +54,7 @@ $(NAME): $(OBJ) $(MINILIBX) $(LIBFT) $(MINIGNL)
 	$(CC) $(CFLAGS) $(LIBS) -I$(HEADER_DIR) $^ -o $@
 
 $(NAME_debug): $(OBJ_debug) $(MINILIBX) $(LIBFT) $(MINIGNL)
-	$(CC) $(CFLAGS) $(LIBS) -I$(HEADER_DIR) $^ -o $@
+	$(CC) $(CFLAGS) $(LIBS) -glldb -I$(HEADER_DIR) $^ -o $@
 
 $(OBJ_DIR):
 	mkdir $@

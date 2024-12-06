@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rdupeux <rdupeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 10:41:30 by romain            #+#    #+#             */
-/*   Updated: 2024/07/18 17:50:45 by romain           ###   ########.fr       */
+/*   Updated: 2024/12/06 15:06:18 by rdupeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ int	key_hook(int button, t_params *p)
 		move_left(p);
 	else if (button == KEY_RIGHT)
 		move_right(p);
-	//display_params(p);
 	display_new_image(p);
 	return (0);
 }

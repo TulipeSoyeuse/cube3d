@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rdupeux <rdupeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 10:45:46 by romain            #+#    #+#             */
-/*   Updated: 2024/07/17 14:29:10 by romain           ###   ########.fr       */
+/*   Updated: 2024/12/06 15:10:45 by rdupeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	run(t_params *p)
 	p->w.cur_img = get_new_image(p);
 	p->w.cache_img = get_new_image(p);
 	calc_image(p);
-	set_info(p);
 	mlx_put_image_to_window(p->w.mlx, p->w.mlx_win, p->w.cur_img.img, 0, 0);
 	loop(p);
 }
@@ -33,7 +32,7 @@ t_img	get_new_image(t_params *p)
 	image.addr = mlx_get_data_addr(image.img, &image.bits_per_pixel,
 			&image.line_length, &image.endian);
 	if (!image.addr)
-		error(p);
+		error(p, "error creating image\n");
 	return (image);
 }
 

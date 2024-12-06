@@ -6,7 +6,7 @@
 /*   By: rdupeux <rdupeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 13:05:05 by romain            #+#    #+#             */
-/*   Updated: 2024/12/06 13:44:25 by rdupeux          ###   ########.fr       */
+/*   Updated: 2024/12/06 14:35:51 by rdupeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,11 @@ void	cleanup(t_params *p)
 	map_cleanup(p->map);
 }
 
-void	error(t_params *p)
+void	error(t_params *p, char *message)
 {
+	write(STDERR_FILENO, "Error\n", 6);
+	if (message)
+		write(STDERR_FILENO, message, ft_strlen(message));
 	cleanup(p);
 	exit(EXIT_FAILURE);
 }
@@ -60,7 +63,6 @@ void	map_error(t_params p, int argc, ...)
 	va_list	a_lst;
 	char	*arg;
 
-	cleanup(&p);
 	va_start(a_lst, argc);
 	while (argc--)
 	{
@@ -69,6 +71,5 @@ void	map_error(t_params p, int argc, ...)
 			free(arg);
 	}
 	va_end(a_lst);
-	write(1, "MAP ERROR\n", 10);
-	exit(1);
+	error(&p, "MAP ERROR\n");
 }

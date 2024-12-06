@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rdupeux <rdupeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:25:22 by romain            #+#    #+#             */
-/*   Updated: 2024/07/18 17:52:38 by romain           ###   ########.fr       */
+/*   Updated: 2024/12/06 14:54:45 by rdupeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,24 +52,26 @@ void	set_color(int *color, const char *line, t_params *p)
 		line++;
 	line++;
 	offset = ft_strchr(line, ',') - line;
-	r = ft_atoin(line, offset);
+	r = ft_atoin(line, offset + 1);
 	line += offset + 1;
 	offset = ft_strchr(line, ',') - line;
-	g = ft_atoin(line, offset);
+	g = ft_atoin(line, offset + 1);
 	line += offset + 1;
 	b = ft_atoi(line);
-	if (r < 0 || g < 0 || b < 0)
-		map_error(*p, 0);
+	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+		error(p, "invalid color\n");
 	*color = rgb_to_hex(r, g, b);
 }
 
 void	set_ti(t_img *texture, const char *line, t_params *p)
 {
-	int	height;
-	int	widht;
+	int		height;
+	int		widht;
+	char	*l;
 
 	height = TEXHEIGHT;
 	widht = TEXWIDHT;
+	l = (char *)line;
 	while (!is_space(*line))
 		line++;
 	while (is_space(*line))
@@ -79,25 +81,33 @@ void	set_ti(t_img *texture, const char *line, t_params *p)
 	texture->effective_height = height;
 	texture->effective_widht = widht;
 	if (!texture->img)
-		map_error(*p, 1, line);
+	{
+		free(l);
+		error(p, "coudn't read image\n");
+	}
 	texture->addr = mlx_get_data_addr(texture->img, &texture->bits_per_pixel,
 			&texture->line_length, &texture->endian);
-	if (!texture->img)
-		map_error(*p, 1, line);
+	if (!texture->addr)
+		map_error(*p, 1, l);
 }
 
 void	set_identifier_handler(t_type_def type, char *line, t_params *p)
 {
-	if (type == NO)
+	if (type == NO && !p->no_texture.img)
 		set_ti(&p->no_texture, line, p);
-	if (type == EA)
+	else if (type == EA && !p->ea_texture.img)
 		set_ti(&p->ea_texture, line, p);
-	if (type == WE)
+	else if (type == WE && !p->we_texture.img)
 		set_ti(&p->we_texture, line, p);
-	if (type == SO)
+	else if (type == SO && !p->so_texture.img)
 		set_ti(&p->so_texture, line, p);
-	if (type == F)
+	else if (type == F && !p->f_color)
 		set_color(&p->f_color, line, p);
-	if (type == C)
+	else if (type == C && !p->c_color)
 		set_color(&p->c_color, line, p);
+	else
+	{
+		free(line);
+		error(p, "incorrect identifier\n");
+	}
 }
