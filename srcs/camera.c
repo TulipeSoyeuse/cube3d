@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rdupeux <rdupeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 14:01:16 by romain            #+#    #+#             */
-/*   Updated: 2024/07/18 17:56:28 by romain           ###   ########.fr       */
+/*   Updated: 2024/12/06 13:49:00 by rdupeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	move_right(t_params *p)
 		p->p_pos.x += p->p_dir.y * MOVESPEED;
 	else
 		return ;
-	if (p->map[(int)p->p_pos.x][(int)(p->p_pos.y + p->p_dir.x
+	if (p->map[(int)p->p_pos.x][(int)(p->p_pos.y - p->p_dir.x
 			* MOVESPEED)] != '1')
 		p->p_pos.y += -p->p_dir.x * MOVESPEED;
 }
