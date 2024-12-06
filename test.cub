@@ -3,8 +3,7 @@ SO ./assets/colorstone.xpm
 WE ./assets/mossy.xpm
 EA ./assets/purplestone.xpm
 
-F 45,100,100
-
+F 200,100,0
 
 C 225,30,0
 

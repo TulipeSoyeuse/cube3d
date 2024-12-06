@@ -6,7 +6,7 @@
 /*   By: rdupeux <rdupeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 10:45:46 by romain            #+#    #+#             */
-/*   Updated: 2024/12/06 15:10:45 by rdupeux          ###   ########.fr       */
+/*   Updated: 2024/12/06 15:55:54 by rdupeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	run(t_params *p)
 {
-	display_params(p);
 	p->w.cur_img = get_new_image(p);
 	p->w.cache_img = get_new_image(p);
 	calc_image(p);

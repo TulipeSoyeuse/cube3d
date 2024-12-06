@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rdupeux <rdupeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:10:32 by romain            #+#    #+#             */
-/*   Updated: 2024/07/23 13:31:15 by romain           ###   ########.fr       */
+/*   Updated: 2024/12/06 15:55:35 by rdupeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,20 @@ void	read_map(int fd, t_params *p)
 	}
 }
 
-void	display_params(t_params *p)
+void	get_map(t_params *p, char *path)
+{
+	int	fd;
+
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+		map_error(*p, 0);
+	read_map(fd, p);
+	if (check_map(p->map))
+		map_error(*p, 0);
+	close(fd);
+}
+
+/* void	display_params(t_params *p)
 {
 	int	i;
 
@@ -81,17 +94,4 @@ void	display_params(t_params *p)
 	printf("mlx_win:%p\n", p->w.mlx_win);
 	printf("mlx_img1:%p\n", p->w.cur_img.img);
 	printf("mlx_img2:%p\n", p->w.cache_img.img);
-}
-
-void	get_map(t_params *p, char *path)
-{
-	int	fd;
-
-	fd = open(path, O_RDONLY);
-	if (fd == -1)
-		map_error(*p, 0);
-	read_map(fd, p);
-	if (check_map(p->map))
-		map_error(*p, 0);
-	close(fd);
-}
+} */
