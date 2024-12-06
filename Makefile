@@ -60,7 +60,7 @@ $(OBJ_DIR):
 	mkdir $@
 
 $(MINILIBX):
-	Make -C $(dir $@)
+	make -C $(dir $@)
 
 $(LIBFT):
 	make -C libft/
