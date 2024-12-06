@@ -6,7 +6,7 @@
 /*   By: rdupeux <rdupeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:25:22 by romain            #+#    #+#             */
-/*   Updated: 2024/12/06 14:54:45 by rdupeux          ###   ########.fr       */
+/*   Updated: 2024/12/06 16:25:47 by rdupeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,9 @@ void	set_identifier_handler(t_type_def type, char *line, t_params *p)
 {
 	if (type == NO && !p->no_texture.img)
 		set_ti(&p->no_texture, line, p);
-	else if (type == EA && !p->ea_texture.img)
+	else if (type == WE && !p->ea_texture.img)
 		set_ti(&p->ea_texture, line, p);
-	else if (type == WE && !p->we_texture.img)
+	else if (type == EA && !p->we_texture.img)
 		set_ti(&p->we_texture, line, p);
 	else if (type == SO && !p->so_texture.img)
 		set_ti(&p->so_texture, line, p);
