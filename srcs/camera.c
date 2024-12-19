@@ -61,3 +61,15 @@ void	move_right(t_params *p)
 		* MOVESPEED)] != '1')
 		p->p_pos.y += -p->p_dir.x * MOVESPEED;
 }
+
+void	key_hook2(int button, t_params *p)
+{
+	if (button == LEFT_ARROW)
+		look_right(p);
+	else if (button == RIGHT_ARROW)
+		look_left(p);
+	else if (button == KEY_LEFT)
+		move_right(p);
+	else if (button == KEY_RIGHT)
+		move_left(p);
+}

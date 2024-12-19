@@ -29,8 +29,8 @@
 // SCREEN
 # define SWIDTH 1200
 # define SHEIGHT 800
-# define TEXHEIGHT 64
-# define TEXWIDHT 64
+# define TEXHEIGHT 32
+# define TEXWIDHT 32
 // KEY
 # define EVENT_CLOSE_BTN 1869819968
 # define KEY_ESC 65307
@@ -41,7 +41,7 @@
 # define LEFT_ARROW 65361
 # define RIGHT_ARROW 65363
 
-# define MOVESPEED 0.49
+# define MOVESPEED 0.39
 
 # define COLOR_BLUE 0x003C43
 # define COLOR_RED 0xED4545
@@ -187,12 +187,15 @@ void			reset_img_color(t_params *p, t_img img);
 
 // HOOKS
 int				key_hook(int button, t_params *p);
+void			key_hook2(int button, t_params *p);
 
 // CAMERA MOVE
 void			move_down(t_params *p);
 void			move_up(t_params *p);
 void			move_left(t_params *p);
 void			move_right(t_params *p);
+void			look_right(t_params *p);
+void			look_left(t_params *p);
 
 // IMAGE SETTER
 int				set_plane(t_params *p, char c);

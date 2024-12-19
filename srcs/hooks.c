@@ -59,22 +59,20 @@ int	key_hook(int button, t_params *p)
 {
 	if (button == EVENT_CLOSE_BTN || button == KEY_ESC)
 		cube_exit(p);
-	else if (button == LEFT_ARROW)
-		look_left(p);
-	else if (button == RIGHT_ARROW)
-		look_right(p);
 	else if (button == KEY_UP)
 		move_up(p);
 	else if (button == KEY_DOWN)
 		move_down(p);
-	else if (button == KEY_LEFT && p->start != 'S')
+	else if (p->start == 'S' || p->start == 'W')
+		key_hook2(button, p);
+	else if (button == LEFT_ARROW)
+		look_left(p);
+	else if (button == RIGHT_ARROW)
+		look_right(p);
+	else if (button == KEY_LEFT)
 		move_left(p);
-	else if (button == KEY_RIGHT && p->start != 'S')
+	else if (button == KEY_RIGHT)
 		move_right(p);
-	else if (button == KEY_LEFT && p->start == 'S')
-		move_right(p);
-	else if (button == KEY_RIGHT && p->start == 'S')
-		move_left(p);
 	display_new_image(p);
 	return (0);
 }

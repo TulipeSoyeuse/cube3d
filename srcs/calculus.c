@@ -25,7 +25,7 @@ void	putline(t_params *p, t_calc_values *c, int col_nbr)
 	v.texx = v.wallx * (double)v.texture.effective_widht;
 	if (c->side == 0 && c->raydir.x > 0)
 		v.texx = v.texture.effective_widht - v.texx - 1;
-	if (c->side == 0 && c->raydir.y < 0)
+	if (c->side == 1 && c->raydir.y < 0)
 		v.texx = v.texture.effective_widht - v.texx - 1;
 	v.step = 1.0 * v.texture.effective_height / c->lineheight;
 	v.texpos = (c->start - SHEIGHT / 2 + c->lineheight / 2) * v.step;

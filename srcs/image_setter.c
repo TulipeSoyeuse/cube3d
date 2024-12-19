@@ -39,12 +39,12 @@ int	set_dir(t_params *p, char c)
 		p->p_dir.x = 1;
 		p->p_dir.y = 0;
 	}
-	else if (c == 'E')
+	else if (c == 'W')
 	{
 		p->p_dir.x = 0;
 		p->p_dir.y = -1;
 	}
-	else if (c == 'W')
+	else if (c == 'E')
 	{
 		p->p_dir.x = 0;
 		p->p_dir.y = 1;
