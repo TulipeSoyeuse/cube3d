@@ -71,7 +71,7 @@ void	get_map(t_params *p, char *path)
 	close(fd);
 }
 
-/* void	display_params(t_params *p)
+void	display_params(t_params *p)
 {
 	int	i;
 
@@ -94,4 +94,4 @@ void	get_map(t_params *p, char *path)
 	printf("mlx_win:%p\n", p->w.mlx_win);
 	printf("mlx_img1:%p\n", p->w.cur_img.img);
 	printf("mlx_img2:%p\n", p->w.cache_img.img);
-} */
+}

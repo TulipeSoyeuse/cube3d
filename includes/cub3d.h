@@ -41,7 +41,7 @@
 # define LEFT_ARROW 65361
 # define RIGHT_ARROW 65363
 
-# define MOVESPEED 0.5
+# define MOVESPEED 0.49
 
 # define COLOR_BLUE 0x003C43
 # define COLOR_RED 0xED4545
@@ -112,6 +112,7 @@ typedef struct s_params
 	char		**map;
 	int			f_color;
 	int			c_color;
+	char		start;
 }				t_params;
 
 typedef struct s_calc_values

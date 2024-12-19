@@ -67,10 +67,14 @@ int	key_hook(int button, t_params *p)
 		move_up(p);
 	else if (button == KEY_DOWN)
 		move_down(p);
-	else if (button == KEY_LEFT)
+	else if (button == KEY_LEFT && p->start != 'S')
 		move_left(p);
-	else if (button == KEY_RIGHT)
+	else if (button == KEY_RIGHT && p->start != 'S')
 		move_right(p);
+	else if (button == KEY_LEFT && p->start == 'S')
+		move_right(p);
+	else if (button == KEY_RIGHT && p->start == 'S')
+		move_left(p);
 	display_new_image(p);
 	return (0);
 }

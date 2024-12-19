@@ -69,6 +69,7 @@ void	set_player_position(t_params *p)
 		{
 			if (set_dir(p, line[j]))
 			{
+				p->start = p->map[i][j];
 				p->map[i][j] = '0';
 				p->p_pos.x = i;
 				p->p_pos.y = j;
