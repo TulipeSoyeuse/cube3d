@@ -60,14 +60,16 @@ void	read_map(int fd, t_params *p)
 
 void	get_map(t_params *p, char *path)
 {
-	int	fd;
+	int		fd;
+	size_t	len;
 
+	len = ft_strlen(path);
 	fd = open(path, O_RDONLY);
-	if (fd == -1)
-		map_error(*p, 0);
+	if (fd == -1 || strcmp(&path[len - 4], ".cub"))
+		error(p, "can't open file or wrong extension\n");
 	read_map(fd, p);
 	if (check_map(p->map))
-		map_error(*p, 0);
+		error(p, NULL);
 	close(fd);
 }
 
