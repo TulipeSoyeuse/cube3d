@@ -38,7 +38,6 @@ void	move_up(t_params *p)
 
 void	move_left(t_params *p)
 {
-	printf("move left\n");
 	if (p->map[(int)(p->p_pos.x - p->p_dir.y
 			* MOVESPEED)][(int)p->p_pos.y] != '1')
 		p->p_pos.x -= p->p_dir.y * MOVESPEED;
@@ -51,7 +50,6 @@ void	move_left(t_params *p)
 
 void	move_right(t_params *p)
 {
-	printf("move right\n");
 	if (p->map[(int)(p->p_pos.x + p->p_dir.y
 			* MOVESPEED)][(int)p->p_pos.y] != '1')
 		p->p_pos.x += p->p_dir.y * MOVESPEED;

@@ -20,7 +20,6 @@ void	cube_exit(t_params *p)
 
 void	loop(t_params *p)
 {
-	display_params(p);
 	mlx_key_hook(p->w.mlx_win, &key_hook, p);
 	mlx_hook(p->w.mlx_win, 17, 0, &close_event, p);
 	mlx_loop(p->w.mlx);
