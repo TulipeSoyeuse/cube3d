@@ -31,13 +31,13 @@ t_params	init(char *path)
 	p.w.cache_img.img = NULL;
 	p.w.cur_img.img = NULL;
 	p.map = NULL;
+	get_map(&p, path);
 	p.w.mlx = mlx_init();
 	if (!p.w.mlx)
 		error(&p, "error initializing mlx\n");
 	p.w.mlx_win = mlx_new_window(p.w.mlx, SWIDTH, SHEIGHT, "Cube3D");
 	if (!p.w.mlx_win)
 		error(&p, "error creating window\n");
-	get_map(&p, path);
 	return (p);
 }
 
