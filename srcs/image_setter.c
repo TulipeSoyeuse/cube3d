@@ -61,6 +61,7 @@ void	set_player_position(t_params *p)
 	char	*line;
 
 	i = 0;
+	p->start = 0;
 	while (p->map[i])
 	{
 		line = p->map[i];
@@ -69,11 +70,12 @@ void	set_player_position(t_params *p)
 		{
 			if (set_dir(p, line[j]))
 			{
+				if (p->start)
+					map_error(*p, 0);
 				p->start = p->map[i][j];
 				p->map[i][j] = '0';
-				p->p_pos.x = i;
-				p->p_pos.y = j;
-				return ;
+				p->p_pos.x = (i + .5);
+				p->p_pos.y = (j + .5);
 			}
 			j++;
 		}

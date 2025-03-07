@@ -73,27 +73,27 @@ void	get_map(t_params *p, char *path)
 	close(fd);
 }
 
-// void	display_params(t_params *p)
-// {
-// 	int	i;
+void	display_params(t_params *p)
+{
+	int	i;
 
-// 	printf("f_color:%x\n", p->f_color);
-// 	printf("c_color:%x\n", p->c_color);
-// 	printf("\nno_texture:%p\n", p->no_texture.addr);
-// 	printf("so_texture:%p\n", p->so_texture.addr);
-// 	printf("ea_texture:%p\n", p->ea_texture.addr);
-// 	printf("we_texture:%p\n", p->we_texture.addr);
-// 	printf("\npos:%f %f\n", p->p_pos.x, p->p_pos.y);
-// 	printf("dir:%f %f\n", p->p_dir.x, p->p_dir.y);
-// 	printf("plane:%f %f\n", p->plane.x, p->plane.y);
-// 	printf("perpendicular: %f\n", p->p_dir.x * p->plane.x + p->p_dir.y
-// 		* p->plane.y);
-// 	printf("\nmap:\n");
-// 	i = 0;
-// 	while (p->map[i])
-// 		printf("%s\n", p->map[i++]);
-// 	printf("\nmlx_ptr:%p\n", p->w.mlx);
-// 	printf("mlx_win:%p\n", p->w.mlx_win);
-// 	printf("mlx_img1:%p\n", p->w.cur_img.img);
-// 	printf("mlx_img2:%p\n", p->w.cache_img.img);
-// }
+	printf("f_color:%x\n", p->f_color);
+	printf("c_color:%x\n", p->c_color);
+	printf("\nno_texture:%p\n", p->no_texture.addr);
+	printf("so_texture:%p\n", p->so_texture.addr);
+	printf("ea_texture:%p\n", p->ea_texture.addr);
+	printf("we_texture:%p\n", p->we_texture.addr);
+	printf("\npos:%f %f\n", p->p_pos.x, p->p_pos.y);
+	printf("dir:%f %f\n", p->p_dir.x, p->p_dir.y);
+	printf("plane:%f %f\n", p->plane.x, p->plane.y);
+	printf("perpendicular: %f\n", p->p_dir.x * p->plane.x + p->p_dir.y
+		* p->plane.y);
+	printf("\nmap:\n");
+	i = 0;
+	while (p->map[i])
+		printf("%s\n", p->map[i++]);
+	printf("\nmlx_ptr:%p\n", p->w.mlx);
+	printf("mlx_win:%p\n", p->w.mlx_win);
+	printf("mlx_img1:%p\n", p->w.cur_img.img);
+	printf("mlx_img2:%p\n", p->w.cache_img.img);
+}
